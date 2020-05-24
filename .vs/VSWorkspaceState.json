@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\windows_admin_app",
+    "\\windows_admin_app\\windows_admin_app"
   ],
+  "SelectedNode": "\\windows_admin_app\\windows_admin_app.sln",
   "PreviewInSolutionExplorer": false
 }
