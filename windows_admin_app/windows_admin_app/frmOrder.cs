@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace windows_admin_app
 {
-    public partial class MainWindow : Form
+    public partial class frmOrder : Form
     {
-        public MainWindow()
+        public frmOrder()
         {
             InitializeComponent();
         }
