@@ -20,7 +20,6 @@ namespace windows_admin_app
 
         internal async static Task<clsAuthor> GetAuthorAsync(string prAuthorName)
         {
-            MessageBox.Show("GetAuthorAsync Called");
             using (HttpClient lcHttpClient = new HttpClient())
                 return JsonConvert.DeserializeObject<clsAuthor>
                 (await lcHttpClient.GetStringAsync

@@ -7,8 +7,7 @@ namespace windows_admin_app
     public partial class frmAuthor : Form
     {
         private clsAuthor _Author;
-        private DateTime _DefaultDate;
-        //private clsBookList _BookList;
+        //private DateTime _DefaultDate;
 
         private static Dictionary<string, frmAuthor> _AuthorFormList =
             new Dictionary<string, frmAuthor>();
@@ -17,8 +16,8 @@ namespace windows_admin_app
         public frmAuthor()
         {
             InitializeComponent();
-            _DefaultDate = DateTime.Today;
-            MessageBox.Show(_DefaultDate.ToString("dd MMMM yyyy hh:mm:ss tt"));
+            //_DefaultDate = DateTime.Today;
+           // MessageBox.Show(_DefaultDate.ToString("dd MMMM yyyy hh:mm:ss tt"));
         }
 
         public static void Run(string prAuthorName)
@@ -59,12 +58,12 @@ namespace windows_admin_app
 
         private void UpdateDisplay()
         {
-            //lbxBooks.DataSource = null;
+            lbxBooks.DataSource = null;
 
-            //if (_Author.BookList != null)
-            //{
-            //    lbxBooks.DataSource = _Author.BookList;
-            //}
+            if (_Author.BookList != null)
+            {
+                lbxBooks.DataSource = _Author.BookList;
+            }
         }
 
         public void UpdateForm()
@@ -72,10 +71,6 @@ namespace windows_admin_app
             txtName.Text = _Author.Name;
             txtEmail.Text = _Author.Email;
             dateJoinDate.Value = _Author.JoinDate;
-            //_WorksList = _Artist.WorksList;
-
-            //frmMain.Instance.GalleryNameChanged += new frmMain.Notify(updateTitle);
-            //updateTitle(_Artist.ArtistList.GalleryName);
         }
 
         public void SetDetails(clsAuthor prAuthor)
@@ -84,7 +79,9 @@ namespace windows_admin_app
 
             _Author = prAuthor;
             txtName.Enabled = string.IsNullOrEmpty(_Author.Name);
-            //dateJoinDate.Enabled = CurrentDate;
+
+            //dateJoinDate.Enabled = CurrentDate;                       // working on this - get dateTime to be editabale on new but not if already full
+
             UpdateForm();
             UpdateDisplay();
            //frmMain.Instance.GalleryNameChanged += new frmMain.Notify(updateTitle);
