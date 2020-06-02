@@ -42,6 +42,8 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.lblBooks = new System.Windows.Forms.Label();
+            this.lblJoinDate = new System.Windows.Forms.Label();
+            this.dateJoinDate = new System.Windows.Forms.DateTimePicker();
             this.gbxBookSort.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,6 +128,7 @@
             this.btnClose.TabIndex = 14;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblAuthorTotal
             // 
@@ -160,7 +163,7 @@
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(23, 76);
+            this.lblEmail.Location = new System.Drawing.Point(23, 65);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(57, 24);
             this.lblEmail.TabIndex = 18;
@@ -177,7 +180,7 @@
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(90, 76);
+            this.txtEmail.Location = new System.Drawing.Point(90, 65);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(363, 24);
             this.txtEmail.TabIndex = 20;
@@ -192,11 +195,30 @@
             this.lblBooks.TabIndex = 21;
             this.lblBooks.Text = "Books";
             // 
-            // AuthorWindow
+            // lblJoinDate
+            // 
+            this.lblJoinDate.AutoSize = true;
+            this.lblJoinDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJoinDate.Location = new System.Drawing.Point(23, 100);
+            this.lblJoinDate.Name = "lblJoinDate";
+            this.lblJoinDate.Size = new System.Drawing.Size(48, 24);
+            this.lblJoinDate.TabIndex = 22;
+            this.lblJoinDate.Text = "Date";
+            // 
+            // dateJoinDate
+            // 
+            this.dateJoinDate.Location = new System.Drawing.Point(90, 101);
+            this.dateJoinDate.Name = "dateJoinDate";
+            this.dateJoinDate.Size = new System.Drawing.Size(363, 22);
+            this.dateJoinDate.TabIndex = 23;
+            // 
+            // frmAuthor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(490, 582);
+            this.Controls.Add(this.dateJoinDate);
+            this.Controls.Add(this.lblJoinDate);
             this.Controls.Add(this.lblBooks);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtName);
@@ -209,7 +231,7 @@
             this.Controls.Add(this.btnDeleteBook);
             this.Controls.Add(this.gbxBookSort);
             this.Controls.Add(this.lbxBooks);
-            this.Name = "AuthorWindow";
+            this.Name = "frmAuthor";
             this.Text = "Author Details";
             this.gbxBookSort.ResumeLayout(false);
             this.gbxBookSort.PerformLayout();
@@ -234,5 +256,7 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label lblBooks;
+        private System.Windows.Forms.Label lblJoinDate;
+        private System.Windows.Forms.DateTimePicker dateJoinDate;
     }
 }

@@ -41,6 +41,8 @@
             this.gbxOrderSort = new System.Windows.Forms.GroupBox();
             this.rbtnOrderDate = new System.Windows.Forms.RadioButton();
             this.rbtnOrderName = new System.Windows.Forms.RadioButton();
+            this.btnQuit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.gbxAuthorSort.SuspendLayout();
             this.gbxOrderSort.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +56,7 @@
             this.lbxAuthor.Name = "lbxAuthor";
             this.lbxAuthor.Size = new System.Drawing.Size(265, 484);
             this.lbxAuthor.TabIndex = 0;
+            this.lbxAuthor.DoubleClick += new System.EventHandler(this.lbxAuthor_DoubleClick);
             // 
             // lbxOrders
             // 
@@ -121,12 +124,13 @@
             this.btnDeleteOrder.TabIndex = 6;
             this.btnDeleteOrder.Text = "Delete";
             this.btnDeleteOrder.UseVisualStyleBackColor = true;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
             // 
             // lblOrderTotalHeading
             // 
             this.lblOrderTotalHeading.AutoSize = true;
             this.lblOrderTotalHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderTotalHeading.Location = new System.Drawing.Point(468, 521);
+            this.lblOrderTotalHeading.Location = new System.Drawing.Point(524, 510);
             this.lblOrderTotalHeading.Name = "lblOrderTotalHeading";
             this.lblOrderTotalHeading.Size = new System.Drawing.Size(159, 24);
             this.lblOrderTotalHeading.TabIndex = 7;
@@ -136,9 +140,9 @@
             // 
             this.lblOrderTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOrderTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderTotal.Location = new System.Drawing.Point(632, 521);
+            this.lblOrderTotal.Location = new System.Drawing.Point(701, 509);
             this.lblOrderTotal.Name = "lblOrderTotal";
-            this.lblOrderTotal.Size = new System.Drawing.Size(371, 25);
+            this.lblOrderTotal.Size = new System.Drawing.Size(261, 25);
             this.lblOrderTotal.TabIndex = 8;
             // 
             // gbxAuthorSort
@@ -193,11 +197,37 @@
             this.rbtnOrderName.Text = "Name";
             this.rbtnOrderName.UseVisualStyleBackColor = true;
             // 
-            // MainWindow
+            // btnQuit
+            // 
+            this.btnQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuit.Location = new System.Drawing.Point(1024, 495);
+            this.btnQuit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnQuit.Name = "btnQuit";
+            this.btnQuit.Size = new System.Drawing.Size(107, 49);
+            this.btnQuit.TabIndex = 11;
+            this.btnQuit.Text = "Quit";
+            this.btnQuit.UseVisualStyleBackColor = true;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(320, 202);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(107, 49);
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 575);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.gbxOrderSort);
             this.Controls.Add(this.gbxAuthorSort);
             this.Controls.Add(this.lblOrderTotal);
@@ -208,8 +238,10 @@
             this.Controls.Add(this.lbxOrders);
             this.Controls.Add(this.lbxAuthor);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "MainWindow";
+            this.Name = "frmMain";
             this.Text = "The Writers Collective";
+            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Click += new System.EventHandler(this.btnAdd_Click);
             this.gbxAuthorSort.ResumeLayout(false);
             this.gbxAuthorSort.PerformLayout();
             this.gbxOrderSort.ResumeLayout(false);
@@ -234,6 +266,8 @@
         private System.Windows.Forms.GroupBox gbxOrderSort;
         private System.Windows.Forms.RadioButton rbtnOrderDate;
         private System.Windows.Forms.RadioButton rbtnOrderName;
+        private System.Windows.Forms.Button btnQuit;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
 

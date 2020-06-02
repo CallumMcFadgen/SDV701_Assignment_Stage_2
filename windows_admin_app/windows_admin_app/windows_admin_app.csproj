@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO.cs" />
     <Compile Include="frmAuthor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +94,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceClient.cs" />
     <EmbeddedResource Include="frmAuthor.resx">
       <DependentUpon>frmAuthor.cs</DependentUpon>
     </EmbeddedResource>
