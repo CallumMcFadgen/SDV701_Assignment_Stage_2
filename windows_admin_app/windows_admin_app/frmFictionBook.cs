@@ -2,11 +2,11 @@
 
 namespace windows_admin_app
 {
-    public sealed partial class frmNonFictionBook : windows_admin_app.frmBook
+    public sealed partial class frmFictionBook : windows_admin_app.frmBook
     {
-        private static readonly frmNonFictionBook Instance = new frmNonFictionBook();
+        private static readonly frmFictionBook Instance = new frmFictionBook();
 
-        private frmNonFictionBook()
+        private frmFictionBook()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace windows_admin_app
             txtPrice.Text = _Book.Price.ToString();
             txtQuantity.Text = _Book.Quantity.ToString();
             dateEditDate.Value = _Book.EditDate;
-            txtCategory.Text = _Book.Category.ToString();
+            txtGenre.Text = _Book.Genre.ToString();
         }
 
         protected override void pushData()
@@ -39,9 +39,7 @@ namespace windows_admin_app
             _Book.Price = decimal.Parse(txtPrice.Text);
             _Book.Quantity = int.Parse(txtQuantity.Text);
             _Book.EditDate = dateEditDate.Value;
-            _Book.Category = txtCategory.Text;
+            _Book.Genre = txtGenre.Text;
         }
-
-
     }
 }

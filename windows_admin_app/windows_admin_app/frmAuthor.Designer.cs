@@ -88,13 +88,15 @@
             // 
             // lbxBooks
             // 
+            this.lbxBooks.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxBooks.FormattingEnabled = true;
-            this.lbxBooks.ItemHeight = 16;
+            this.lbxBooks.ItemHeight = 18;
             this.lbxBooks.Location = new System.Drawing.Point(27, 205);
             this.lbxBooks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxBooks.Name = "lbxBooks";
-            this.lbxBooks.Size = new System.Drawing.Size(426, 212);
+            this.lbxBooks.Size = new System.Drawing.Size(426, 202);
             this.lbxBooks.TabIndex = 10;
+            this.lbxBooks.DoubleClick += new System.EventHandler(this.lbxBooks_DoubleClick);
             // 
             // btnDeleteBook
             // 
@@ -133,7 +135,7 @@
             // lblAuthorTotal
             // 
             this.lblAuthorTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblAuthorTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuthorTotal.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAuthorTotal.Location = new System.Drawing.Point(169, 428);
             this.lblAuthorTotal.Name = "lblAuthorTotal";
             this.lblAuthorTotal.Size = new System.Drawing.Size(243, 25);
@@ -171,18 +173,18 @@
             // 
             // txtName
             // 
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(90, 30);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(363, 24);
+            this.txtName.Size = new System.Drawing.Size(363, 25);
             this.txtName.TabIndex = 19;
             // 
             // txtEmail
             // 
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(90, 65);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(363, 24);
+            this.txtEmail.Size = new System.Drawing.Size(363, 25);
             this.txtEmail.TabIndex = 20;
             // 
             // lblBooks
@@ -207,9 +209,11 @@
             // 
             // dateJoinDate
             // 
+            this.dateJoinDate.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateJoinDate.Location = new System.Drawing.Point(90, 101);
+            this.dateJoinDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateJoinDate.Name = "dateJoinDate";
-            this.dateJoinDate.Size = new System.Drawing.Size(363, 22);
+            this.dateJoinDate.Size = new System.Drawing.Size(363, 25);
             this.dateJoinDate.TabIndex = 23;
             // 
             // frmAuthor

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace self_hosting_service
 {
@@ -11,12 +8,28 @@ namespace self_hosting_service
     {
         #region PARAMETER CONFIGURATION
 
-        private Dictionary<string, object> prepareAuthorParameters(clsAuthor prAuthor)
+        private Dictionary<string, object> prepareAuthorParameters(clsAuthor Author)
         {
             Dictionary<string, object> par = new Dictionary<string, object>(3);
-            par.Add("Name", prAuthor.Name);
-            par.Add("Email", prAuthor.Email);
-            par.Add("JoinDate", prAuthor.JoinDate);
+            par.Add("Name", Author.Name);
+            par.Add("Email", Author.Email);
+            par.Add("JoinDate", Author.JoinDate);
+            return par;
+        }
+
+        private Dictionary<string, object> prepareBookParameters(clsBook prBook)
+        {
+            Dictionary<string, object> par = new Dictionary<string, object>(10);
+            par.Add("Isbn", prBook.Isbn);
+            par.Add("Type", prBook.Type);
+            par.Add("Title", prBook.Title);
+            par.Add("Desc", prBook.Desc);
+            par.Add("Price", prBook.Price);
+            par.Add("Quantity", prBook.Quantity);
+            par.Add("EditDate", prBook.EditDate);
+            par.Add("Genre", prBook.EditDate);
+            par.Add("Category", prBook.Category);
+            par.Add("AuthorName", prBook.AuthorName);
             return par;
         }
 
@@ -24,38 +37,23 @@ namespace self_hosting_service
 
         #region DATA FORMATTING
 
-        private clsBook formatBookData(DataRow prDataRow)
+        private clsBook formatBookData(DataRow DataRow)
         {
             Console.Write("formatBookData called" + "\n" + "\n");
-
             return new clsBook()
             {
-                Isbn = Convert.ToChar(prDataRow["isbn_number"]),
-                Type = Convert.ToString(prDataRow["type"]),
-                Title = Convert.ToString(prDataRow["title"]),
-                Desc = prDataRow["Description"] is DBNull ? (float?)null : Convert.ToSingle(prDataRow["Description"]),
-                Price = Convert.ToDecimal(prDataRow["price"]),
-                Quantity = Convert.ToInt32(prDataRow["quantity"]),
-                EditDate = Convert.ToDateTime(prDataRow["edit_date"]),
-                Genre = prDataRow["genre"] is DBNull ? (float?)null : Convert.ToSingle(prDataRow["genre"]),
-                Category = prDataRow["category"] is DBNull ? (float?)null : Convert.ToSingle(prDataRow["category"]),
-                AuthorName = Convert.ToString(prDataRow["author_name"])
+                Isbn = Convert.ToString(DataRow["isbn_number"]),
+                Type = Convert.ToString(DataRow["type"]),
+                Title = Convert.ToString(DataRow["title"]),
+                Desc = DataRow["Description"] is DBNull ? null : Convert.ToString(DataRow["description"]),
+                Price = Convert.ToDecimal(DataRow["price"]),
+                Quantity = Convert.ToInt32(DataRow["quantity"]),
+                EditDate = Convert.ToDateTime(DataRow["edit_date"]),
+                Genre = DataRow["Genre"] is DBNull ? null : Convert.ToString(DataRow["genre"]),
+                Category = DataRow["Category"] is DBNull ? null : Convert.ToString(DataRow["category"]),
+                AuthorName = Convert.ToString(DataRow["author_name"])
             };
         }
-
-        //private clsOrder formatOrderData(DataRow prDataRow)
-        //{
-        //    return new clsOrder()
-        //    {
-        //        Number = Convert.ToInt32(prDataRow["Number"]),
-        //        Name = Convert.ToString(prDataRow["Name"]),
-        //        Email = Convert.ToString(prDataRow["Email"]),
-        //        OrderDate = Convert.ToDateTime(prDataRow["OrderDate"]),
-        //        Price = Convert.ToDecimal(prDataRow["Price"]),
-        //        Quantity = Convert.ToInt32(prDataRow["Quantity"]),
-        //        Isbn = Convert.ToChar(prDataRow["Isbn"])
-        //    };
-        //}
 
         #endregion
 
@@ -86,43 +84,43 @@ namespace self_hosting_service
                     Name = (string)lcResult.Rows[0]["author_name"],
                     Email = (string)lcResult.Rows[0]["email_address"],
                     JoinDate = (DateTime)lcResult.Rows[0]["join_date"],
-                    BookList = getAuthorBooks(Name)                             // issue here
+                    BookList = getAuthorBooks(Name)
                 };
             else
                 return null;
         }
 
-        private List<clsBook> getAuthorBooks(string prName)
+        public List<clsBook> getAuthorBooks(string Name)
         {
             Dictionary<string, object> par = new Dictionary<string, object>(1);
-            par.Add("Name", prName);
+            par.Add("Name", Name);
             DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book WHERE author_name = @Name", par);
             List<clsBook> lcBooks = new List<clsBook>();
             Console.Write("getAuthorBooks called" + "\n" + "\n");
 
             foreach (DataRow dr in lcResult.Rows)
-            lcBooks.Add(formatBookData(dr));                                    // is called with author name,  maybe formating problem?
+            lcBooks.Add(formatBookData(dr));
             return lcBooks;
         }
 
-        //needs testing
-        public List<string> GetOrderNumbers()
+        public List<int> GetBookOrderDetails()
         {
-            DataTable lcResult = clsDbConnection.GetDataTable("SELECT order_number FROM order", null);
-            List<string> lcNumbers = new List<string>();
+            DataTable lcResult = clsDbConnection.GetDataTable("SELECT order_number FROM book_order", null);
+            List<int> lcDetails = new List<int>();
+            Console.Write("getBookOrderDetails called" + "\n" + "\n");
 
             foreach (DataRow dr in lcResult.Rows)
-                lcNumbers.Add((string)dr[0]);
-            return lcNumbers;
+                lcDetails.Add((int)dr[0]);
+            return lcDetails;
         }
 
-        //needs testing
-        public clsOrder GetOrder(int Number)
+        public clsOrder GetBookOrder(string Number)
         {
             Dictionary<string, object> par = new Dictionary<string, object>(1);
             par.Add("Number", Number);
             DataTable lcResult =
-            clsDbConnection.GetDataTable("SELECT * FROM order WHERE order_number = @Number", par);
+            clsDbConnection.GetDataTable("SELECT * FROM book_order WHERE order_number = @Number", par);
+            Console.Write("getBookOrder called" + "\n" + "\n");
 
             if (lcResult.Rows.Count > 0)
                 return new clsOrder()
@@ -133,24 +131,23 @@ namespace self_hosting_service
                     OrderDate = (DateTime)lcResult.Rows[0]["order_date"],
                     Price = (decimal)lcResult.Rows[0]["item_price"],
                     Quantity = (int)lcResult.Rows[0]["quantity"],
-                    Isbn = (char)lcResult.Rows[0]["isbn_number"],
+                    Isbn = (string)lcResult.Rows[0]["isbn_number"]
                 };
             else
                 return null;
         }
 
-
         #endregion
 
         #region PUT APIs
 
-        public string PutAuthor(clsAuthor prAuthor)
+        public string PutAuthor(clsAuthor Author)
         {
             try
             {
                 int lcRecCount = clsDbConnection.Execute(
                 "UPDATE author SET email_address = @Email WHERE author_name = @Name",
-                prepareAuthorParameters(prAuthor));
+                prepareAuthorParameters(Author));
 
                 if (lcRecCount == 1)
                     return "Author record updated";
@@ -163,17 +160,45 @@ namespace self_hosting_service
             }
         }
 
+        public string PutBook(clsBook Book)
+        {
+            try
+            {
+                int lcRecCount = clsDbConnection.Execute(
+                "UPDATE book SET " +
+                "type = @Type, " +
+                "title = @Title, " +
+                "description = @Desc, " +
+                "price = @Price, " +
+                "quantity = @Quantity, " +
+                "edit_date = @EditDate, " +
+                "genre = @Genre, " +
+                "category = @Category, " +
+                "author_name = @AuthorName " +
+                "WHERE isbn_number = @Isbn",
+                prepareBookParameters(Book));
+                if (lcRecCount == 1)
+                    return "One book updated";
+                else
+                    return "Unexpected book update count: " + lcRecCount;
+            }
+            catch (Exception ex)
+            {
+                return ex.GetBaseException().Message;
+            }
+        }
+
         #endregion
 
         #region POST APIs
 
-        public string PostAuthor(clsAuthor prAuthor)
+        public string PostAuthor(clsAuthor Author)
         {
             try
             {
                 int lcRecCount = clsDbConnection.Execute(
                 "INSERT INTO author (author_name, email_address, join_date) VALUES ( @Name, @Email, @JoinDate )",
-                prepareAuthorParameters(prAuthor));
+                prepareAuthorParameters(Author));
 
                 if (lcRecCount == 1)
                     return "New author record created";
@@ -184,7 +209,26 @@ namespace self_hosting_service
             {
                 return ex.GetBaseException().Message;
             }
-        } 
+        }
+
+        public string PostBook(clsBook prBook)
+        {
+            try
+            {
+                int lcRecCount = clsDbConnection.Execute("INSERT INTO book " +
+                "(isbn_number, type, title, description, price, quantity, edit_date, genre, category, author_name) " +
+                "VALUES (@Isbn, @Type, @Title, @Desc, @Price, @Quantity, @EditDate, @Genre, @Category, @AuthorName)",
+                prepareBookParameters(prBook));
+                if (lcRecCount == 1)
+                    return "One book added";
+                else
+                    return "Unexpected book addition count: " + lcRecCount;
+            }
+            catch (Exception ex)
+            {
+                return ex.GetBaseException().Message;
+            }
+        }
 
         #endregion
 

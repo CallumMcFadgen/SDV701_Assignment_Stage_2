@@ -1,6 +1,6 @@
 ﻿namespace windows_admin_app
 {
-    partial class frmFicitonBook
+    partial class frmFictionBook
     {
         /// <summary>
         /// Required designer variable.
@@ -34,10 +34,10 @@
             // 
             // txtGenre
             // 
-            this.txtGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGenre.Location = new System.Drawing.Point(105, 434);
+            this.txtGenre.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGenre.Location = new System.Drawing.Point(134, 433);
             this.txtGenre.Name = "txtGenre";
-            this.txtGenre.Size = new System.Drawing.Size(346, 24);
+            this.txtGenre.Size = new System.Drawing.Size(317, 25);
             this.txtGenre.TabIndex = 39;
             // 
             // lblGenre
@@ -50,13 +50,18 @@
             this.lblGenre.TabIndex = 38;
             this.lblGenre.Text = "Genre";
             // 
-            // frmFicitonBook
+            // frmFictionBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.ClientSize = new System.Drawing.Size(490, 572);
             this.Controls.Add(this.txtGenre);
             this.Controls.Add(this.lblGenre);
-            this.Name = "frmFicitonBook";
+            this.Name = "frmFictionBook";
+            this.Controls.SetChildIndex(this.txtISBN, 0);
+            this.Controls.SetChildIndex(this.txtTitle, 0);
+            this.Controls.SetChildIndex(this.txtDesc, 0);
+            this.Controls.SetChildIndex(this.txtPrice, 0);
+            this.Controls.SetChildIndex(this.txtQuantity, 0);
             this.Controls.SetChildIndex(this.lblGenre, 0);
             this.Controls.SetChildIndex(this.txtGenre, 0);
             this.ResumeLayout(false);

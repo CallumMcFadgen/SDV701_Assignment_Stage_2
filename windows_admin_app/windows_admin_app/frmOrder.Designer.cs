@@ -52,17 +52,17 @@
             // lblOrderNumber
             // 
             this.lblOrderNumber.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderNumber.Location = new System.Drawing.Point(125, 23);
+            this.lblOrderNumber.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderNumber.Location = new System.Drawing.Point(125, 26);
             this.lblOrderNumber.Name = "lblOrderNumber";
-            this.lblOrderNumber.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderNumber.Size = new System.Drawing.Size(325, 28);
             this.lblOrderNumber.TabIndex = 39;
             // 
             // lblOrderNu
             // 
             this.lblOrderNu.AutoSize = true;
             this.lblOrderNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderNu.Location = new System.Drawing.Point(12, 23);
+            this.lblOrderNu.Location = new System.Drawing.Point(12, 26);
             this.lblOrderNu.Name = "lblOrderNu";
             this.lblOrderNu.Size = new System.Drawing.Size(94, 24);
             this.lblOrderNu.TabIndex = 38;
@@ -71,17 +71,17 @@
             // lblOrderDate
             // 
             this.lblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderDate.Location = new System.Drawing.Point(125, 65);
+            this.lblOrderDate.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderDate.Location = new System.Drawing.Point(125, 73);
             this.lblOrderDate.Name = "lblOrderDate";
-            this.lblOrderDate.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderDate.Size = new System.Drawing.Size(325, 28);
             this.lblOrderDate.TabIndex = 41;
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(12, 65);
+            this.lblDate.Location = new System.Drawing.Point(12, 73);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(48, 24);
             this.lblDate.TabIndex = 40;
@@ -90,17 +90,17 @@
             // lblOrderTitle
             // 
             this.lblOrderTitle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderTitle.Location = new System.Drawing.Point(125, 106);
+            this.lblOrderTitle.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderTitle.Location = new System.Drawing.Point(125, 119);
             this.lblOrderTitle.Name = "lblOrderTitle";
-            this.lblOrderTitle.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderTitle.Size = new System.Drawing.Size(325, 28);
             this.lblOrderTitle.TabIndex = 43;
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(12, 106);
+            this.lblTitle.Location = new System.Drawing.Point(12, 119);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(45, 24);
             this.lblTitle.TabIndex = 42;
@@ -109,17 +109,17 @@
             // lblOrderISBN
             // 
             this.lblOrderISBN.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderISBN.Location = new System.Drawing.Point(125, 147);
+            this.lblOrderISBN.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderISBN.Location = new System.Drawing.Point(125, 165);
             this.lblOrderISBN.Name = "lblOrderISBN";
-            this.lblOrderISBN.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderISBN.Size = new System.Drawing.Size(325, 28);
             this.lblOrderISBN.TabIndex = 45;
             // 
             // lblISBN
             // 
             this.lblISBN.AutoSize = true;
             this.lblISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblISBN.Location = new System.Drawing.Point(12, 147);
+            this.lblISBN.Location = new System.Drawing.Point(12, 165);
             this.lblISBN.Name = "lblISBN";
             this.lblISBN.Size = new System.Drawing.Size(52, 24);
             this.lblISBN.TabIndex = 44;
@@ -128,17 +128,17 @@
             // lblOrderName
             // 
             this.lblOrderName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderName.Location = new System.Drawing.Point(125, 185);
+            this.lblOrderName.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderName.Location = new System.Drawing.Point(125, 208);
             this.lblOrderName.Name = "lblOrderName";
-            this.lblOrderName.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderName.Size = new System.Drawing.Size(325, 28);
             this.lblOrderName.TabIndex = 47;
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(12, 185);
+            this.lblName.Location = new System.Drawing.Point(12, 208);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(61, 24);
             this.lblName.TabIndex = 46;
@@ -147,17 +147,17 @@
             // lblOrderEmail
             // 
             this.lblOrderEmail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderEmail.Location = new System.Drawing.Point(125, 225);
+            this.lblOrderEmail.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderEmail.Location = new System.Drawing.Point(125, 253);
             this.lblOrderEmail.Name = "lblOrderEmail";
-            this.lblOrderEmail.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderEmail.Size = new System.Drawing.Size(325, 28);
             this.lblOrderEmail.TabIndex = 49;
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(12, 225);
+            this.lblEmail.Location = new System.Drawing.Point(12, 253);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(57, 24);
             this.lblEmail.TabIndex = 48;
@@ -166,17 +166,17 @@
             // lblOrderPrice
             // 
             this.lblOrderPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderPrice.Location = new System.Drawing.Point(125, 268);
+            this.lblOrderPrice.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderPrice.Location = new System.Drawing.Point(125, 302);
             this.lblOrderPrice.Name = "lblOrderPrice";
-            this.lblOrderPrice.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderPrice.Size = new System.Drawing.Size(325, 28);
             this.lblOrderPrice.TabIndex = 51;
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
             this.lblPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrice.Location = new System.Drawing.Point(12, 268);
+            this.lblPrice.Location = new System.Drawing.Point(12, 302);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(53, 24);
             this.lblPrice.TabIndex = 50;
@@ -185,17 +185,17 @@
             // lblOrderQuantity
             // 
             this.lblOrderQuantity.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderQuantity.Location = new System.Drawing.Point(125, 306);
+            this.lblOrderQuantity.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderQuantity.Location = new System.Drawing.Point(125, 344);
             this.lblOrderQuantity.Name = "lblOrderQuantity";
-            this.lblOrderQuantity.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderQuantity.Size = new System.Drawing.Size(325, 28);
             this.lblOrderQuantity.TabIndex = 53;
             // 
             // lblQuantity
             // 
             this.lblQuantity.AutoSize = true;
             this.lblQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantity.Location = new System.Drawing.Point(12, 306);
+            this.lblQuantity.Location = new System.Drawing.Point(12, 344);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(78, 24);
             this.lblQuantity.TabIndex = 52;
@@ -204,17 +204,17 @@
             // lblOrderTotal
             // 
             this.lblOrderTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderTotal.Location = new System.Drawing.Point(125, 347);
+            this.lblOrderTotal.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderTotal.Location = new System.Drawing.Point(125, 390);
             this.lblOrderTotal.Name = "lblOrderTotal";
-            this.lblOrderTotal.Size = new System.Drawing.Size(325, 25);
+            this.lblOrderTotal.Size = new System.Drawing.Size(325, 28);
             this.lblOrderTotal.TabIndex = 55;
             // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(12, 347);
+            this.lblTotal.Location = new System.Drawing.Point(12, 390);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(51, 24);
             this.lblTotal.TabIndex = 54;
@@ -223,19 +223,19 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(202, 415);
+            this.btnClose.Location = new System.Drawing.Point(202, 467);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(107, 49);
+            this.btnClose.Size = new System.Drawing.Size(107, 55);
             this.btnClose.TabIndex = 56;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
             // frmOrder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 487);
+            this.ClientSize = new System.Drawing.Size(490, 548);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblOrderTotal);
             this.Controls.Add(this.lblTotal);
@@ -255,8 +255,9 @@
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblOrderNumber);
             this.Controls.Add(this.lblOrderNu);
+            this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmOrder";
-            this.Text = "Order Details";
+            this.Text = "Book Order Details";
             this.ResumeLayout(false);
             this.PerformLayout();
 

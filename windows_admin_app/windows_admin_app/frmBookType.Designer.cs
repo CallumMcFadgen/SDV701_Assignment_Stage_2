@@ -58,11 +58,11 @@
             // 
             // cmbBookSelect
             // 
-            this.cmbBookSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBookSelect.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBookSelect.FormattingEnabled = true;
             this.cmbBookSelect.Location = new System.Drawing.Point(37, 50);
             this.cmbBookSelect.Name = "cmbBookSelect";
-            this.cmbBookSelect.Size = new System.Drawing.Size(280, 30);
+            this.cmbBookSelect.Size = new System.Drawing.Size(280, 26);
             this.cmbBookSelect.TabIndex = 16;
             // 
             // lblBookSelectHeading

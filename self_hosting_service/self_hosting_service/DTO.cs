@@ -20,15 +20,15 @@ namespace self_hosting_service
     #region BOOK DTO
 	public class clsBook
     {
-        public char Isbn { get; set; }
+        public string Isbn { get; set; }
         public string Type { get; set; }
         public string Title { get; set; }
-        public float? Desc { get; set; } 
+        public string Desc { get; set; } 
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public DateTime EditDate { get; set; }
-        public float? Genre { get; set; }
-        public float? Category { get; set; }
+        public string  Genre { get; set; }
+        public string Category { get; set; }
         public string AuthorName { get; set; }
     } 
 	#endregion
@@ -43,7 +43,7 @@ namespace self_hosting_service
         public DateTime OrderDate { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public char Isbn { get; set; }
+        public string Isbn { get; set; }
     } 
 	#endregion
 

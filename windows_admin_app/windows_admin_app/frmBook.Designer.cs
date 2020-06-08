@@ -36,28 +36,30 @@
             this.lblDesc = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.lblPrice = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.lblEditDate = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblDate = new System.Windows.Forms.Label();
+            this.dateEditDate = new System.Windows.Forms.DateTimePicker();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
+            this.lblAuthor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtTitle
             // 
-            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(107, 75);
+            this.txtTitle.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Location = new System.Drawing.Point(136, 75);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(344, 24);
+            this.txtTitle.Size = new System.Drawing.Size(315, 25);
             this.txtTitle.TabIndex = 24;
             // 
             // txtISBN
             // 
-            this.txtISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtISBN.Location = new System.Drawing.Point(105, 29);
+            this.txtISBN.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtISBN.Location = new System.Drawing.Point(134, 29);
             this.txtISBN.Name = "txtISBN";
-            this.txtISBN.Size = new System.Drawing.Size(346, 24);
+            this.txtISBN.Size = new System.Drawing.Size(317, 25);
             this.txtISBN.TabIndex = 23;
             // 
             // lblTitle
@@ -82,18 +84,18 @@
             // 
             // txtDesc
             // 
-            this.txtDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesc.Location = new System.Drawing.Point(105, 122);
+            this.txtDesc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDesc.Location = new System.Drawing.Point(134, 158);
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(346, 149);
+            this.txtDesc.Size = new System.Drawing.Size(317, 113);
             this.txtDesc.TabIndex = 26;
             // 
             // lblDesc
             // 
             this.lblDesc.AutoSize = true;
             this.lblDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDesc.Location = new System.Drawing.Point(21, 122);
+            this.lblDesc.Location = new System.Drawing.Point(21, 158);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(53, 24);
             this.lblDesc.TabIndex = 25;
@@ -101,10 +103,10 @@
             // 
             // txtPrice
             // 
-            this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(105, 292);
+            this.txtPrice.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrice.Location = new System.Drawing.Point(134, 292);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(346, 24);
+            this.txtPrice.Size = new System.Drawing.Size(317, 25);
             this.txtPrice.TabIndex = 28;
             // 
             // lblPrice
@@ -117,13 +119,13 @@
             this.lblPrice.TabIndex = 27;
             this.lblPrice.Text = "Price";
             // 
-            // textBox3
+            // txtQuantity
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(105, 342);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(346, 24);
-            this.textBox3.TabIndex = 30;
+            this.txtQuantity.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuantity.Location = new System.Drawing.Point(134, 342);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(317, 25);
+            this.txtQuantity.TabIndex = 30;
             // 
             // lblQuantity
             // 
@@ -155,6 +157,7 @@
             this.btnConfirm.TabIndex = 36;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -166,26 +169,47 @@
             this.btnCancel.TabIndex = 35;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lblDate
+            // dateEditDate
             // 
-            this.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(105, 390);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(346, 25);
-            this.lblDate.TabIndex = 37;
+            this.dateEditDate.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateEditDate.Location = new System.Drawing.Point(134, 390);
+            this.dateEditDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dateEditDate.Name = "dateEditDate";
+            this.dateEditDate.Size = new System.Drawing.Size(317, 25);
+            this.dateEditDate.TabIndex = 38;
+            // 
+            // txtAuthor
+            // 
+            this.txtAuthor.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAuthor.Location = new System.Drawing.Point(136, 116);
+            this.txtAuthor.Name = "txtAuthor";
+            this.txtAuthor.Size = new System.Drawing.Size(315, 25);
+            this.txtAuthor.TabIndex = 40;
+            // 
+            // lblAuthor
+            // 
+            this.lblAuthor.AutoSize = true;
+            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuthor.Location = new System.Drawing.Point(21, 116);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(66, 24);
+            this.lblAuthor.TabIndex = 39;
+            this.lblAuthor.Text = "Author";
             // 
             // frmBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(490, 572);
-            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.txtAuthor);
+            this.Controls.Add(this.lblAuthor);
+            this.Controls.Add(this.dateEditDate);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblEditDate);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.lblPrice);
@@ -203,20 +227,21 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.TextBox txtISBN;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lbIISBN;
-        private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.Label lblDesc;
-        private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label lblPrice;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.Label lblEditDate;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblDate;
+        public System.Windows.Forms.TextBox txtISBN;
+        public System.Windows.Forms.TextBox txtTitle;
+        public System.Windows.Forms.TextBox txtDesc;
+        public System.Windows.Forms.TextBox txtPrice;
+        public System.Windows.Forms.TextBox txtQuantity;
+        public System.Windows.Forms.DateTimePicker dateEditDate;
+        public System.Windows.Forms.TextBox txtAuthor;
+        private System.Windows.Forms.Label lblAuthor;
     }
 }

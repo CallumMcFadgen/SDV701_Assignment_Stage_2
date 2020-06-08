@@ -49,19 +49,21 @@
             // 
             // lbxAuthor
             // 
+            this.lbxAuthor.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxAuthor.FormattingEnabled = true;
-            this.lbxAuthor.ItemHeight = 16;
+            this.lbxAuthor.ItemHeight = 18;
             this.lbxAuthor.Location = new System.Drawing.Point(35, 60);
             this.lbxAuthor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxAuthor.Name = "lbxAuthor";
-            this.lbxAuthor.Size = new System.Drawing.Size(265, 484);
+            this.lbxAuthor.Size = new System.Drawing.Size(265, 472);
             this.lbxAuthor.TabIndex = 0;
             this.lbxAuthor.DoubleClick += new System.EventHandler(this.lbxAuthor_DoubleClick);
             // 
             // lbxOrders
             // 
+            this.lbxOrders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxOrders.FormattingEnabled = true;
-            this.lbxOrders.ItemHeight = 16;
+            this.lbxOrders.ItemHeight = 18;
             this.lbxOrders.Location = new System.Drawing.Point(469, 60);
             this.lbxOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxOrders.Name = "lbxOrders";
@@ -139,7 +141,7 @@
             // lblOrderTotal
             // 
             this.lblOrderTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrderTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderTotal.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOrderTotal.Location = new System.Drawing.Point(701, 509);
             this.lblOrderTotal.Name = "lblOrderTotal";
             this.lblOrderTotal.Size = new System.Drawing.Size(261, 25);

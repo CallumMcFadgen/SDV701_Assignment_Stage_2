@@ -7,17 +7,11 @@ namespace windows_admin_app
     public partial class frmAuthor : Form
     {
         private clsAuthor _Author;
-        //private DateTime _DefaultDate;
-
-        private static Dictionary<string, frmAuthor> _AuthorFormList =
-            new Dictionary<string, frmAuthor>();
-
+        private static Dictionary<string, frmAuthor> _AuthorFormList = new Dictionary<string, frmAuthor>();
 
         public frmAuthor()
         {
             InitializeComponent();
-            //_DefaultDate = DateTime.Today;
-           // MessageBox.Show(_DefaultDate.ToString("dd MMMM yyyy hh:mm:ss tt"));
         }
 
         public static void Run(string prAuthorName)
@@ -29,11 +23,14 @@ namespace windows_admin_app
             {
                 lcAuthorForm = new frmAuthor();
                 if (string.IsNullOrEmpty(prAuthorName))
+                { 
                     lcAuthorForm.SetDetails(new clsAuthor());
+                }
                 else
                 {
                     _AuthorFormList.Add(prAuthorName, lcAuthorForm);
                     lcAuthorForm.refreshFormFromDB(prAuthorName);
+                    lcAuthorForm.DisableTextFields();
                 }
             }
             else
@@ -43,17 +40,15 @@ namespace windows_admin_app
             }
         }
 
-        private async void refreshFormFromDB(string prAuthorName)
+       private void DisableTextFields()
         {
-            SetDetails(await ServiceClient.GetAuthorAsync(prAuthorName));
+            dateJoinDate.Enabled = false;
+            txtName.Enabled = false;
         }
 
-        private void updateTitle(string prGalleryName)
+        private async void refreshFormFromDB(string prAuthorName)
         {
-            if (!string.IsNullOrEmpty(prGalleryName))
-            {
-                Text = "Artist Details - " + prGalleryName;
-            }
+           SetDetails(await ServiceClient.GetAuthorAsync(prAuthorName));       //bombs out
         }
 
         private void UpdateDisplay()
@@ -70,22 +65,15 @@ namespace windows_admin_app
         {
             txtName.Text = _Author.Name;
             txtEmail.Text = _Author.Email;
-            dateJoinDate.Value = _Author.JoinDate;
+            //dateJoinDate.Value = _Author.JoinDate;
         }
 
         public void SetDetails(clsAuthor prAuthor)
         {
-            
-
             _Author = prAuthor;
             txtName.Enabled = string.IsNullOrEmpty(_Author.Name);
-
-            //dateJoinDate.Enabled = CurrentDate;                       // working on this - get dateTime to be editabale on new but not if already full
-
             UpdateForm();
             UpdateDisplay();
-           //frmMain.Instance.GalleryNameChanged += new frmMain.Notify(updateTitle);
-            //updateTitle(_Artist.ArtistList.GalleryName);
             Show();
         }
 
@@ -94,7 +82,6 @@ namespace windows_admin_app
             _Author.Name = txtName.Text;
             _Author.Email = txtEmail.Text;
             _Author.JoinDate = dateJoinDate.Value;
-            //_WorksList.SortOrder = _SortOrder; // no longer required, updated with each rbByDate_CheckedChanged
         }
 
         //private async void btnAdd_Click(object sender, EventArgs e)
@@ -132,19 +119,19 @@ namespace windows_admin_app
         //    }
         //}
 
-        //private void lstWorks_DoubleClick(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        frmWork.DispatchWorkForm(lstWorks.SelectedValue as clsAllWork);
-        //        UpdateDisplay();
-        //        frmMain.Instance.UpdateDisplay();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
+        private void lbxBooks_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                frmBook.DispatchBookForm(lbxBooks.SelectedValue as clsBook);
+                UpdateDisplay();
+                frmMain.Instance.UpdateDisplay();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         //private async void btnDelete_Click(object sender, EventArgs e)
         //{
@@ -169,6 +156,7 @@ namespace windows_admin_app
                         MessageBox.Show(await ServiceClient.InsertAuthorAsync(_Author));
                         frmMain.Instance.UpdateDisplay();
                         txtName.Enabled = false;
+                        dateJoinDate.Enabled = false;
                     }
                     else
                         MessageBox.Show(await ServiceClient.UpdateAuthorAsync(_Author));
@@ -180,18 +168,16 @@ namespace windows_admin_app
                 }
         }
 
-        private Boolean isValid()
+        private bool isValid()
         {
-            //if (txtName.Enabled && txtName.Text != "")
-            //    if (_Artist.IsDuplicate(txtName.Text))
-            //    {
-            //        MessageBox.Show("Artist with that name already exists!", "Error adding artist");
-            //        return false;
-            //    }
-            //    else
-            //        return true;
-            //else
-            return true;
+            if (string.IsNullOrWhiteSpace(txtName.Text) && string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void rbByDate_CheckedChanged(object sender, EventArgs e)

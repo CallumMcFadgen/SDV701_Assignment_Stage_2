@@ -68,11 +68,11 @@
     <Compile Include="frmBookType.Designer.cs">
       <DependentUpon>frmBookType.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmFicitonBook.cs">
+    <Compile Include="frmFictionBook.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmFicitonBook.Designer.cs">
-      <DependentUpon>frmFicitonBook.cs</DependentUpon>
+    <Compile Include="frmFictionBook.Designer.cs">
+      <DependentUpon>frmFictionBook.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -104,8 +104,8 @@
     <EmbeddedResource Include="frmBookType.resx">
       <DependentUpon>frmBookType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmFicitonBook.resx">
-      <DependentUpon>frmFicitonBook.cs</DependentUpon>
+    <EmbeddedResource Include="frmFictionBook.resx">
+      <DependentUpon>frmFictionBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
