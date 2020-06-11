@@ -6,13 +6,25 @@ namespace windows_admin_app
 {
     public partial class frmAuthor : Form
     {
+
+        #region VARIABLES
+
         private clsAuthor _Author;
+
         private static Dictionary<string, frmAuthor> _AuthorFormList = new Dictionary<string, frmAuthor>();
+
+        #endregion
+
+        #region CONSTRUCTOR
 
         public frmAuthor()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region RUN METHOD
 
         public static void Run(string prAuthorName)
         {
@@ -23,7 +35,7 @@ namespace windows_admin_app
             {
                 lcAuthorForm = new frmAuthor();
                 if (string.IsNullOrEmpty(prAuthorName))
-                { 
+                {
                     lcAuthorForm.SetDetails(new clsAuthor());
                 }
                 else
@@ -40,7 +52,10 @@ namespace windows_admin_app
             }
         }
 
-       private void DisableTextFields()
+        #endregion
+
+        #region METHODS
+        private void DisableTextFields()
         {
             dateJoinDate.Enabled = false;
             txtName.Enabled = false;
@@ -48,7 +63,7 @@ namespace windows_admin_app
 
         private async void refreshFormFromDB(string prAuthorName)
         {
-           SetDetails(await ServiceClient.GetAuthorAsync(prAuthorName));       //bombs out
+            SetDetails(await ServiceClient.GetAuthorAsync(prAuthorName));
         }
 
         private void UpdateDisplay()
@@ -65,7 +80,7 @@ namespace windows_admin_app
         {
             txtName.Text = _Author.Name;
             txtEmail.Text = _Author.Email;
-            //dateJoinDate.Value = _Author.JoinDate;
+            dateJoinDate.Value = _Author.JoinDate.ToUniversalTime();
         }
 
         public void SetDetails(clsAuthor prAuthor)
@@ -82,48 +97,50 @@ namespace windows_admin_app
             _Author.Name = txtName.Text;
             _Author.Email = txtEmail.Text;
             _Author.JoinDate = dateJoinDate.Value;
+        } 
+        #endregion
+
+        #region UI METHODS
+        private async void btnAdd_Click(object sender, EventArgs e)
+        {
+            string lcReply = new frmBookType().Answer;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(lcReply))
+                {
+                    clsBook lcBook = clsBook.NewBook(lcReply);
+                    if (lcBook != null)
+                    {
+                        if (txtName.Enabled)
+                        {
+                            pushData();
+                            await ServiceClient.InsertAuthorAsync(_Author);
+                            txtName.Enabled = false;
+                        }
+
+                        lcBook.AuthorName = _Author.Name;
+                        frmBook.DispatchBookForm(lcBook);
+
+                        if (!string.IsNullOrEmpty(lcBook.Isbn))
+                        {
+                            refreshFormFromDB(_Author.Name);
+                            frmMain.Instance.UpdateDisplay();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-
-        //private async void btnAdd_Click(object sender, EventArgs e)
-        //{
-        //    string lcReply = new InputBox(clsAllWork.FACTORY_PROMPT).Answer;
-
-        //    try
-        //    {
-        //        if (!string.IsNullOrEmpty(lcReply)) // not cancelled?
-        //        {
-        //            clsAllWork lcWork = clsAllWork.NewWork(lcReply[0]);
-        //            if (lcWork != null) // valid artwork created?
-        //            {
-        //                if (txtName.Enabled) // new artist not saved?
-        //                {
-        //                    pushData();
-        //                    await ServiceClient.InsertArtistAsync(_Artist);
-        //                    txtName.Enabled = false;
-        //                }
-
-        //                lcWork.ArtistName = _Artist.Name;
-        //                frmWork.DispatchWorkForm(lcWork);
-
-        //                if (!string.IsNullOrEmpty(lcWork.Name)) // not cancelled?
-        //                {
-        //                    refreshFormFromDB(_Artist.Name);
-        //                    frmMain.Instance.UpdateDisplay();
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
 
         private void lbxBooks_DoubleClick(object sender, EventArgs e)
         {
             try
             {
-                frmBook.DispatchBookForm(lbxBooks.SelectedValue as clsBook);
+                frmBook.DispatchBookForm(lbxBooks.SelectedItem as clsBook);
                 UpdateDisplay();
                 frmMain.Instance.UpdateDisplay();
             }
@@ -133,21 +150,21 @@ namespace windows_admin_app
             }
         }
 
-        //private async void btnDelete_Click(object sender, EventArgs e)
-        //{
-        //    int lcIndex = lstWorks.SelectedIndex;
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            int lcIndex = lbxBooks.SelectedIndex;
 
-        //    if (lcIndex >= 0 && MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-        //    {
-        //        MessageBox.Show(await ServiceClient.DeleteArtworkAsync(lstWorks.SelectedItem as clsAllWork));
-        //        refreshFormFromDB(_Artist.Name);
-        //        frmMain.Instance.UpdateDisplay();
-        //    }
-        //}
+            if (lcIndex >= 0 && MessageBox.Show("Are you sure?", "Deleting Book", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                MessageBox.Show(await ServiceClient.DeleteBookAsync(lbxBooks.SelectedItem as clsBook));
+                refreshFormFromDB(_Author.Name);
+                frmMain.Instance.UpdateDisplay();
+            }
+        }
 
         private async void btnClose_Click(object sender, EventArgs e)
         {
-            if (isValid() == true)
+            if (isNameValid() == true && isEmailValid() == true)
                 try
                 {
                     pushData();
@@ -166,25 +183,35 @@ namespace windows_admin_app
                 {
                     MessageBox.Show(ex.Message);
                 }
-        }
+        } 
 
-        private bool isValid()
+        #endregion
+
+        #region INPUT VALIDATION
+
+        private bool isNameValid()
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text) && string.IsNullOrWhiteSpace(txtEmail.Text))
+            if (string.IsNullOrWhiteSpace(txtName.Text))
             {
+                MessageBox.Show("Please enter an author name");
                 return false;
             }
-            else
+
+            return true;
+        } 
+
+        private bool isEmailValid()
+        {
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                return true;
+                MessageBox.Show("Please enter an email address");
+                return false;
             }
+            
+                return true;
         }
 
-        private void rbByDate_CheckedChanged(object sender, EventArgs e)
-        {
-            //_WorksList.SortOrder = Convert.ToByte(rbByDate.Checked);
-            UpdateDisplay();
-        }
+        #endregion
 
     }
 }

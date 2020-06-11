@@ -33,6 +33,14 @@ namespace self_hosting_service
             return par;
         }
 
+        private Dictionary<string, object> prepareDeleteBookParameters(string prIsbn, string prAuthorName)
+        {
+            Dictionary<string, object> par = new Dictionary<string, object>(2);
+            par.Add("Isbn", prIsbn);
+            par.Add("AuthorName", prAuthorName);
+            return par;
+        }
+
         #endregion
 
         #region DATA FORMATTING
@@ -103,14 +111,14 @@ namespace self_hosting_service
             return lcBooks;
         }
 
-        public List<int> GetBookOrderDetails()
+        public List<clsBook> GetBookOrderDetails()
         {
-            DataTable lcResult = clsDbConnection.GetDataTable("SELECT order_number FROM book_order", null);
-            List<int> lcDetails = new List<int>();
+            DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book_order", null);
+            List<clsBook> lcDetails = new List<clsBook>();
             Console.Write("getBookOrderDetails called" + "\n" + "\n");
 
             foreach (DataRow dr in lcResult.Rows)
-                lcDetails.Add((int)dr[0]);
+                lcDetails.Add((clsBook)dr[0]);
             return lcDetails;
         }
 
@@ -211,14 +219,14 @@ namespace self_hosting_service
             }
         }
 
-        public string PostBook(clsBook prBook)
+        public string PostBook(clsBook Book)
         {
             try
             {
                 int lcRecCount = clsDbConnection.Execute("INSERT INTO book " +
                 "(isbn_number, type, title, description, price, quantity, edit_date, genre, category, author_name) " +
                 "VALUES (@Isbn, @Type, @Title, @Desc, @Price, @Quantity, @EditDate, @Genre, @Category, @AuthorName)",
-                prepareBookParameters(prBook));
+                prepareBookParameters(Book));
                 if (lcRecCount == 1)
                     return "One book added";
                 else
@@ -232,6 +240,27 @@ namespace self_hosting_service
 
         #endregion
 
+
+        #region DELETE APIs
+        public string DeleteBook(string Isbn, string AuthorName)
+        {
+            try
+            {
+                int lcRecCount = clsDbConnection.Execute(
+                    "DELETE FROM book WHERE isbn_number = @Isbn AND author_name = @AuthorName",
+                    prepareDeleteBookParameters(Isbn, AuthorName));
+
+                if (lcRecCount == 1)
+                    return "One book deleted";
+                else
+                    return "Unexpected book deletion count: " + lcRecCount;
+            }
+            catch (Exception ex)
+            {
+                return ex.GetBaseException().Message;
+            }
+        } 
+        #endregion
 
 
     }

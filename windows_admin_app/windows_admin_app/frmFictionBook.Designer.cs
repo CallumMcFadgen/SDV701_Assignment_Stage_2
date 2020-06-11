@@ -36,6 +36,7 @@
             // 
             this.txtGenre.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGenre.Location = new System.Drawing.Point(134, 433);
+            this.txtGenre.MaxLength = 100;
             this.txtGenre.Name = "txtGenre";
             this.txtGenre.Size = new System.Drawing.Size(317, 25);
             this.txtGenre.TabIndex = 39;
@@ -57,6 +58,9 @@
             this.Controls.Add(this.txtGenre);
             this.Controls.Add(this.lblGenre);
             this.Name = "frmFictionBook";
+            this.Text = "Fiction Book Details";
+            this.Controls.SetChildIndex(this.dateEditDate, 0);
+            this.Controls.SetChildIndex(this.txtAuthor, 0);
             this.Controls.SetChildIndex(this.txtISBN, 0);
             this.Controls.SetChildIndex(this.txtTitle, 0);
             this.Controls.SetChildIndex(this.txtDesc, 0);

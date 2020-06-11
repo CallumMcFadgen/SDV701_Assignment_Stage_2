@@ -42,7 +42,6 @@
             this.rbtnOrderDate = new System.Windows.Forms.RadioButton();
             this.rbtnOrderName = new System.Windows.Forms.RadioButton();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.gbxAuthorSort.SuspendLayout();
             this.gbxOrderSort.SuspendLayout();
             this.SuspendLayout();
@@ -211,24 +210,11 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(320, 202);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(107, 49);
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 575);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.gbxOrderSort);
             this.Controls.Add(this.gbxAuthorSort);
@@ -243,7 +229,6 @@
             this.Name = "frmMain";
             this.Text = "The Writers Collective";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Click += new System.EventHandler(this.btnAdd_Click);
             this.gbxAuthorSort.ResumeLayout(false);
             this.gbxAuthorSort.PerformLayout();
             this.gbxOrderSort.ResumeLayout(false);
@@ -269,7 +254,6 @@
         private System.Windows.Forms.RadioButton rbtnOrderDate;
         private System.Windows.Forms.RadioButton rbtnOrderName;
         private System.Windows.Forms.Button btnQuit;
-        private System.Windows.Forms.Button btnAdd;
     }
 }
 

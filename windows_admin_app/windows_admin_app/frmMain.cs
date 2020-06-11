@@ -27,27 +27,29 @@ namespace windows_admin_app
         }
         #endregion
 
+        #region LOAD METHOD
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             UpdateDisplay();
-        }
+        } 
 
-        //public delegate void Notify(string prGalleryName);
-
-        //public event Notify GalleryNameChanged;
-
-        //private void updateTitle(string prGalleryName)
-        //{
-        //    if (!string.IsNullOrEmpty(prGalleryName))
-        //        Text = "Gallery (v3 C) - " + prGalleryName;
-        //}
+        #endregion
 
         public async void UpdateDisplay()
         {
+            List<string> lcauthors = new List<string>();
+            lcauthors = await ServiceClient.GetAuthorNamesAsync();
+
+            //List<string> lcorders = new List<string>();
+            //lcorders = await ServiceClient.GetOrderDetailsAsync();
+
             try
             {
                 lbxAuthor.DataSource = null;
-                lbxAuthor.DataSource = await ServiceClient.GetAuthorNamesAsync();
+                lbxOrders.DataSource = null;
+                lbxAuthor.DataSource = lcauthors;
+                //lbxOrders.DataSource = lcorders;
             }
             catch (Exception ex)
             {
@@ -55,17 +57,28 @@ namespace windows_admin_app
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                frmAuthor.Run(null);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //class ClsNameComparer : IComparer<_authors>      //name comparer
+        //{
+        //    public int Compare(_authors prActivityX, _authors prActivityY)
+        //    {
+        //        return prActivityX.Name.CompareTo(prActivityY.Name);
+        //    }
+        //}
+
+        #region UI METHODS
+
+        // CURRENTLY NOT IMPLEMENTED
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        frmAuthor.Run(null);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
         private void lbxAuthor_DoubleClick(object sender, EventArgs e)
         {
@@ -83,46 +96,38 @@ namespace windows_admin_app
                 }
         }
 
-
-
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
             UpdateDisplay();
         }
 
 
-
-        private async void btnDelete_Click(object sender, EventArgs e)
-        {
-            //string lcKey;
-            //lcKey = Convert.ToString(lstArtists.SelectedItem);
-
-            //if (lcKey != null && MessageBox.Show("Deleting an artist can not be undone", "Are you sure",
-            //    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //    try
-            //    {
-            //        MessageBox.Show(await ServiceClient.DeleteArtist(lcKey));
-            //        lstArtists.ClearSelected();
-            //        UpdateDisplay();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message, "Error deleting artist");
-            //    }
-        }
-
-
-        //private void btnGalName_Click(object sender, EventArgs e)
+        // CURRENTLY NOT IMPLEMENTED
+        //private async void btnDelete_Click(object sender, EventArgs e)
         //{
-        //_ArtistList.GalleryName = new InputBox("Enter Gallery Name:").Answer;
-        //GalleryNameChanged(_ArtistList.GalleryName);
-        //}
+        //string lcKey;
+        //lcKey = Convert.ToString(lstArtists.SelectedItem);
 
+        //if (lcKey != null && MessageBox.Show("Deleting an artist can not be undone", "Are you sure",
+        //    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        //    try
+        //    {
+        //        MessageBox.Show(await ServiceClient.DeleteArtist(lcKey));
+        //        lstArtists.ClearSelected();
+        //        UpdateDisplay();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error deleting artist");
+        //    }
+        //}
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
             Close();
-        }
+        } 
+
+        #endregion
 
     }
 }

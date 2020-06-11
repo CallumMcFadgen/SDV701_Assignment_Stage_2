@@ -50,6 +50,7 @@
             // 
             this.txtTitle.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitle.Location = new System.Drawing.Point(136, 75);
+            this.txtTitle.MaxLength = 255;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(315, 25);
             this.txtTitle.TabIndex = 24;
@@ -58,6 +59,7 @@
             // 
             this.txtISBN.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtISBN.Location = new System.Drawing.Point(134, 29);
+            this.txtISBN.MaxLength = 13;
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(317, 25);
             this.txtISBN.TabIndex = 23;
@@ -86,6 +88,7 @@
             // 
             this.txtDesc.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesc.Location = new System.Drawing.Point(134, 158);
+            this.txtDesc.MaxLength = 5000;
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(317, 113);
@@ -105,6 +108,7 @@
             // 
             this.txtPrice.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrice.Location = new System.Drawing.Point(134, 292);
+            this.txtPrice.MaxLength = 18;
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(317, 25);
             this.txtPrice.TabIndex = 28;
@@ -184,6 +188,7 @@
             // 
             this.txtAuthor.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAuthor.Location = new System.Drawing.Point(136, 116);
+            this.txtAuthor.MaxLength = 100;
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.Size = new System.Drawing.Size(315, 25);
             this.txtAuthor.TabIndex = 40;

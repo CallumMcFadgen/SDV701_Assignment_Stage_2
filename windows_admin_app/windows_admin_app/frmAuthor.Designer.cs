@@ -108,6 +108,7 @@
             this.btnDeleteBook.TabIndex = 12;
             this.btnDeleteBook.Text = "Delete";
             this.btnDeleteBook.UseVisualStyleBackColor = true;
+            this.btnDeleteBook.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAddBook
             // 
@@ -119,6 +120,7 @@
             this.btnAddBook.TabIndex = 13;
             this.btnAddBook.Text = "Add";
             this.btnAddBook.UseVisualStyleBackColor = true;
+            this.btnAddBook.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnClose
             // 
@@ -175,6 +177,7 @@
             // 
             this.txtName.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(90, 30);
+            this.txtName.MaxLength = 100;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(363, 25);
             this.txtName.TabIndex = 19;
@@ -183,6 +186,7 @@
             // 
             this.txtEmail.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(90, 65);
+            this.txtEmail.MaxLength = 255;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(363, 25);
             this.txtEmail.TabIndex = 20;

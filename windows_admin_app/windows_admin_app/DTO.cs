@@ -38,6 +38,12 @@ namespace windows_admin_app
             return string.Format("{0, -38}", Title) + "$" + string.Format("{0, 0}", Price);
         }
 
+        // FACTORY METHOD
+        public static clsBook NewBook(string prChoice)
+        {
+            return new clsBook() { Type = prChoice };
+        }
+
     }
 
     #region ORDER DTO
@@ -50,6 +56,8 @@ namespace windows_admin_app
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string Isbn { get; set; }
+
+        public List<clsOrder> OrderList { get; set; }
     }
     #endregion
 

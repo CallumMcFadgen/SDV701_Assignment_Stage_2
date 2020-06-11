@@ -25,6 +25,14 @@ namespace windows_admin_app
                 return JsonConvert.DeserializeObject<clsAuthor>
                 (await lcHttpClient.GetStringAsync("http://localhost:60064/api/store/GetAuthor?Name=" + prAuthorName));
         }
+
+        internal async static Task<List<string>> GetOrderDetailsAsync()
+        {
+            using (HttpClient lcHttpClient = new HttpClient())
+                return JsonConvert.DeserializeObject<List<string>>
+                (await lcHttpClient.GetStringAsync("http://localhost:60064/api/store/GetBookOrderDetails"));
+        }
+
         #endregion
 
         #region GENERIC INSERT/UPDATE METHOD
@@ -51,7 +59,7 @@ namespace windows_admin_app
 
         internal async static Task<string> InsertBookAsync(clsBook prBook)
         {
-            return await InsertOrUpdateAsync(prBook, "http://localhost:60064/api/gallery/PostBook", "POST");
+            return await InsertOrUpdateAsync(prBook, "http://localhost:60064/api/store/PostBook", "POST");
         }
 
         #endregion
@@ -69,5 +77,16 @@ namespace windows_admin_app
         }
 
         #endregion
+
+
+        internal async static Task<string> DeleteBookAsync(clsBook prBook)
+        {
+            using (HttpClient lcHttpClient = new HttpClient())
+            {
+                HttpResponseMessage lcRespMessage = await lcHttpClient.DeleteAsync
+                ($"http://localhost:60064/api/store/DeleteBook?Isbn={prBook.Isbn}&AuthorName={prBook.AuthorName}");
+                return await lcRespMessage.Content.ReadAsStringAsync();
+            }
+        }
     }
 }

@@ -36,6 +36,7 @@
             // 
             this.txtCategory.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCategory.Location = new System.Drawing.Point(134, 434);
+            this.txtCategory.MaxLength = 100;
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(317, 25);
             this.txtCategory.TabIndex = 41;
@@ -57,6 +58,9 @@
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.lblCategory);
             this.Name = "frmNonFictionBook";
+            this.Text = "Non-fiction Book Details";
+            this.Controls.SetChildIndex(this.dateEditDate, 0);
+            this.Controls.SetChildIndex(this.txtAuthor, 0);
             this.Controls.SetChildIndex(this.txtISBN, 0);
             this.Controls.SetChildIndex(this.txtTitle, 0);
             this.Controls.SetChildIndex(this.txtDesc, 0);

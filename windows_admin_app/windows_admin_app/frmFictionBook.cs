@@ -19,14 +19,13 @@ namespace windows_admin_app
         protected override void updateForm()
         {
             base.updateForm();
-            txtISBN.Text = _Book.Isbn.ToString();
-            txtTitle.Text = _Book.Title.ToString();
-            txtAuthor.Text = _Book.AuthorName.ToString();
-            txtDesc.Text = _Book.Desc.ToString();
+            txtISBN.Text = _Book.Isbn;
+            txtTitle.Text = _Book.Title;
+            txtAuthor.Text = _Book.AuthorName;
+            txtDesc.Text = _Book.Desc;
             txtPrice.Text = _Book.Price.ToString();
             txtQuantity.Text = _Book.Quantity.ToString();
-            dateEditDate.Value = _Book.EditDate;
-            txtGenre.Text = _Book.Genre.ToString();
+            txtGenre.Text = _Book.Genre;
         }
 
         protected override void pushData()
@@ -38,7 +37,7 @@ namespace windows_admin_app
             _Book.Desc = txtDesc.Text;
             _Book.Price = decimal.Parse(txtPrice.Text);
             _Book.Quantity = int.Parse(txtQuantity.Text);
-            _Book.EditDate = dateEditDate.Value;
+            _Book.EditDate = DateTime.Now;
             _Book.Genre = txtGenre.Text;
         }
     }
