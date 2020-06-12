@@ -3,6 +3,7 @@ import { LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -17,13 +18,21 @@ export class MainPage implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public loadingController: LoadingController) {
+    public loadingController: LoadingController,
+    private router: Router)
+
+  {
     this.authors = [];
     this.error = '';
   }
 
   ngOnInit() {
       this.loadAuthors();
+    }
+
+    goToAuthorPage(id) {
+      this.router.navigate(['/author', id]);
+      console.log(id);
     }
 
     async loadAuthors() {
