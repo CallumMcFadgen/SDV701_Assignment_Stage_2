@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar header_style>
+    <ion-title header_logo_style>The writers collective</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item-group>
+      <ion-item-divider>
+        <h1 heading_style>Our authors</h1>
+      </ion-item-divider>
+      <ng-container *ngFor="let author of authors">
+        <ion-item detail="true" routerLink="../author" routerDirection="forward" lines="full">
+          <ion-icon size="large" slot="start" name="person-circle-outline"></ion-icon>
+          <ion-label label_style>{{author}}</ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-item-group>
+    </ion-content>
+
+<ion-footer>
+  <ion-toolbar footer_style>
+  </ion-toolbar>
+</ion-footer>
