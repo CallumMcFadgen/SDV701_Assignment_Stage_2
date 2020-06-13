@@ -29,21 +29,22 @@
     --background: #a6a8a5 !important;
 }
 
-[footer_style] {
-    --background: #a6a8a5 !important;
-    height: 4vh;
-}
-
-// styling for the header logo
-[header_logo_style] {
-    font-size: 125%;
-    font-weight: bold;
-    text-align: center  !important;
-}
-
-[heading_style] {
-    font-size: 175%;
+[main_heading_style] {
+    font-size: 150%;
     color: #4a4b49;
     font-weight: bold;
     text-align: center;
+    padding-top: 1vh;
+}
+
+[sub_heading_style] {
+    font-size: 80%;
+    color: #4a4b49;
+    text-align: center;
+    padding: 0;
+}
+
+[footer_style] {
+    --background: #a6a8a5 !important;
+    height: 4vh;
 }

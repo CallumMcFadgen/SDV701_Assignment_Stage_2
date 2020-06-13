@@ -5,6 +5,8 @@ import { finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Storage } from '@ionic/storage';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-author',
@@ -13,48 +15,54 @@ import { Location } from '@angular/common';
 })
 export class AuthorPage implements OnInit {
 
-  loading: any;
-  author: object ;
-  error: string;
+  loading = null;
+  author_id = null ;
+  author = null;
+  error = null;
+  moment = moment;
 
   constructor(
     private http: HttpClient,
     public loadingController: LoadingController,
     private router: Router,
-    private location: Location) {
-    this.author = [];
-    this.error = '';
-  }
+    private location: Location,
+    private storage: Storage
+    ) {
+      this.setAuthorID();
+    }
 
   ngOnInit() {
     this.loadAuthor();
   }
 
+  // SET THE AUTHOR ID FOR API ROUTE
+  async setAuthorID() {
+    await this.storage.get('author_id').then((prAuthorName) => {
+      this.author_id = prAuthorName;
+    });
+  }
+
+  // LOAD AUTHOR OBJECT FROM API ROUTE
   async loadAuthor() {
-    // start loading spinner
     await this.presentLoadingAuthors();
-    // GET request
-    this.getAuthors()
+    this.getAuthor()
       .pipe(
         finalize(async () => {
-          // stop loading spinner on finish
           await this.loading.dismiss();
         })
       )
       .subscribe(
         data => {
-          // Set the data to an array
           this.author = data;
           console.log(data);
         },
         err => {
-          // Set error information to display in the template
           this.error = `Retriving author failed: Status: ${err.status}, Message: ${err.statusText}`;
         }
       );
   }
 
-  // loading spinner
+  // LOADING SPINNER
   async presentLoadingAuthors() {
     this.loading = await this.loadingController.create({
       message: 'Loading author...'
@@ -63,8 +71,9 @@ export class AuthorPage implements OnInit {
   }
 
   // API URL
-  private getAuthors(): Observable<object> {
-    const dataUrl = 'http://localhost:60064/api/store/GetAuthorNames/';
+  private getAuthor(): Observable<object> {
+    const id = this.author_id;
+    const dataUrl = 'http://localhost:60064/api/store/GetAuthor?Name=' + id;
     console.log(dataUrl);
     return this.http.get(dataUrl);
   }

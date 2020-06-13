@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-main',
@@ -12,54 +13,48 @@ import { Router } from '@angular/router';
 })
 export class MainPage implements OnInit {
 
-  loading: any;
-  authors: object ;
-  error: string;
+  loading = null;
+  authors = null ;
+  error = null;
 
   constructor(
     private http: HttpClient,
     public loadingController: LoadingController,
-    private router: Router)
-
-  {
-    this.authors = [];
-    this.error = '';
-  }
+    private router: Router,
+    private storage: Storage
+    ) {}
 
   ngOnInit() {
       this.loadAuthors();
     }
 
-    goToAuthorPage(id) {
-      this.router.navigate(['/author', id]);
-      console.log(id);
-    }
+    // SET ID TO STORAGE AND NAVIGATE TO AUTHOR PAGE
+    goToAuthorPage(prAuthorName: any) {
+      this.storage.set('author_id', prAuthorName);
+      this.router.navigate(['/author']);
+  }
 
+  // LOAD AUTHOR NAMES FROM API ROUTE
     async loadAuthors() {
-      // start loading spinner
       await this.presentLoadingAuthors();
-      // GET request
       this.getAuthors()
         .pipe(
           finalize(async () => {
-            // stop loading spinner on finish
             await this.loading.dismiss();
           })
         )
         .subscribe(
           data => {
-            // Set the data to an array
             this.authors = data;
             console.log(data);
           },
           err => {
-            // Set error information to display in the template
             this.error = `Retriving authors failed: Status: ${err.status}, Message: ${err.statusText}`;
           }
         );
     }
 
-    // loading spinner
+    // LOADING SPINNER
     async presentLoadingAuthors() {
       this.loading = await this.loadingController.create({
         message: 'Loading authors...'

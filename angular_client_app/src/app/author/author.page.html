@@ -5,19 +5,23 @@
         <ion-icon name="arrow-back-outline" size="lg" slot="start"></ion-icon>
       </ion-button>
   </ion-buttons>
-    <ion-title header_logo_style >Author name</ion-title>    
+    <ion-title main_heading_style >{{author?.Name}}</ion-title>
+    <p sub_heading_style>Member since {{this.moment(author?.JoinDate).utc().format("D MMMM YYYY")}}</p>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-item-group>
       <ion-item-divider>
-        <h1 heading_style>Our authors</h1>
+        <h1 heading_style>Books</h1>
       </ion-item-divider>
-      <ng-container *ngFor="">
-        <ion-item detail="true" routerLink="../author" routerDirection="forward" lines="full">
-          <ion-icon size="large" slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label label_style></ion-label>
+      <ng-container *ngFor="let book of author?.BookList">
+        <ion-item detail="true" routerLink="../book" routerDirection="forward" lines="full">
+        <ion-label>
+          <p><b>{{book.Title}}</b></p>
+          <p>{{book.Type}}</p>
+          <p>${{book.Price}}</p>
+          </ion-label>
         </ion-item>
       </ng-container>
     </ion-item-group>

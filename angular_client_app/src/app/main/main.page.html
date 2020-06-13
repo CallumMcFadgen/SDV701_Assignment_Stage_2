@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar header_style>
-    <ion-title header_logo_style>The writers collective</ion-title>
+    <ion-title main_heading_style>The writers collective</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-item-group>
       <ion-item-divider>
-        <h1 heading_style>Our authors</h1>
+        <h3>Our authors</h3>
       </ion-item-divider>
       <ng-container *ngFor="let author of authors">
         <ion-item detail="true" (click)="goToAuthorPage([author])" routerDirection="forward" lines="full">
