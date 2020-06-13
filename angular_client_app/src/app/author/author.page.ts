@@ -42,9 +42,15 @@ export class AuthorPage implements OnInit {
     });
   }
 
+    // SET ID TO STORAGE AND NAVIGATE TO BOOK PAGE
+  goToBookPage(prBookNumber: any) {
+    this.storage.set('book_id', prBookNumber);
+    this.router.navigate(['/book']);
+  }
+
   // LOAD AUTHOR OBJECT FROM API ROUTE
   async loadAuthor() {
-    await this.presentLoadingAuthors();
+    await this.presentLoadingAuthor();
     this.getAuthor()
       .pipe(
         finalize(async () => {
@@ -57,13 +63,13 @@ export class AuthorPage implements OnInit {
           console.log(data);
         },
         err => {
-          this.error = `Retriving author failed: Status: ${err.status}, Message: ${err.statusText}`;
+          this.error = `Retriving an author failed: Status: ${err.status}, Message: ${err.statusText}`;
         }
       );
   }
 
   // LOADING SPINNER
-  async presentLoadingAuthors() {
+  async presentLoadingAuthor() {
     this.loading = await this.loadingController.create({
       message: 'Loading author...'
     });

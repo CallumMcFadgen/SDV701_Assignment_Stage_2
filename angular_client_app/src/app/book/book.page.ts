@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Storage } from '@ionic/storage';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-book',
@@ -9,12 +15,74 @@ import { Location } from '@angular/common';
 })
 export class BookPage implements OnInit {
 
+  loading = null;
+  book_id = null ;
+  book = null;
+  error = null;
+  moment = moment;
+
   constructor(
+    private http: HttpClient,
+    public loadingController: LoadingController,
     private router: Router,
-    private location: Location
-  ) { }
+    private location: Location,
+    private storage: Storage
+  ) {
+    this.setBookID();
+  }
 
   ngOnInit() {
+    this.loadBook();
+  }
+
+    // SET THE BOOK ID FOR API ROUTE
+    async setBookID() {
+      await this.storage.get('book_id').then((prBookNumber) => {
+        this.book_id = prBookNumber;
+        console.log(this.book_id);
+      });
+    }
+
+  // SET ID TO STORAGE AND NAVIGATE TO BOOK PAGE
+  // goToBookPage(prBookNumber: any) {
+  //   this.storage.set('book_id', prBookNumber);
+  //   this.router.navigate(['/book']);
+  // }
+
+  // LOAD AUTHOR OBJECT FROM API ROUTE
+  async loadBook() {
+    await this.presentLoadingBook();
+    this.getBook()
+      .pipe(
+        finalize(async () => {
+          await this.loading.dismiss();
+        })
+      )
+      .subscribe(
+        data => {
+          this.book = data;
+          console.log(data);
+        },
+        err => {
+          this.error = `Retriving a book failed: Status: ${err.status}, Message: ${err.statusText}`;
+        }
+      );
+  }
+
+  // LOADING SPINNER
+  async presentLoadingBook() {
+    this.loading = await this.loadingController.create({
+      message: 'Loading book...'
+    });
+    await this.loading.present();
+  }
+
+  // API URL
+  private getBook(): Observable<object> {
+    const id = this.book_id;
+    const dataUrl = 'http://localhost:60064/api/store/GetBook?Isbn=' + id;
+    console.log(dataUrl);
+    return this.http.get(dataUrl);
   }
 
   goBack(default_href) {

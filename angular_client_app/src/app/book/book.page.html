@@ -5,14 +5,15 @@
         <ion-icon name="arrow-back-outline" size="lg" slot="start"></ion-icon>
       </ion-button>
   </ion-buttons>
-    <ion-title header_logo_style *ngIf="">Book Name</ion-title>    
+    <ion-title><b>{{book?.Title}}</b></ion-title>    
+    <ion-title *ngIf="book?.Category">Category : {{book?.Category}}</ion-title>   
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-item-group>
       <ion-item-divider>
-        <h1 heading_style>Our authors</h1>
+        <h3>Details</h3>
       </ion-item-divider>
       <ng-container *ngFor="">
         <ion-item detail="true" routerLink="../author" routerDirection="forward" lines="full">

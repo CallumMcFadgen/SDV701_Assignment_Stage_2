@@ -29,9 +29,9 @@ export class MainPage implements OnInit {
     }
 
     // SET ID TO STORAGE AND NAVIGATE TO AUTHOR PAGE
-    goToAuthorPage(prAuthorName: any) {
-      this.storage.set('author_id', prAuthorName);
-      this.router.navigate(['/author']);
+  goToAuthorPage(prAuthorName: any) {
+    this.storage.set('author_id', prAuthorName);
+    this.router.navigate(['/author']);
   }
 
   // LOAD AUTHOR NAMES FROM API ROUTE
