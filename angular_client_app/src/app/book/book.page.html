@@ -1,28 +1,62 @@
 <ion-header>
   <ion-toolbar header_style>
     <ion-buttons slot="start">
-      <ion-button (click)="goBack('/main')">
+      <ion-button (click)="goBack('/author')">
         <ion-icon name="arrow-back-outline" size="lg" slot="start"></ion-icon>
       </ion-button>
-  </ion-buttons>
-    <ion-title><b>{{book?.Title}}</b></ion-title>    
-    <ion-title *ngIf="book?.Category">Category : {{book?.Category}}</ion-title>   
+    </ion-buttons>
+    <ion-title ><b>{{book?.Title}}</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-item-group>
-      <ion-item-divider>
-        <h3>Details</h3>
-      </ion-item-divider>
-      <ng-container *ngFor="">
-        <ion-item detail="true" routerLink="../author" routerDirection="forward" lines="full">
-          <ion-icon size="large" slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label label_style></ion-label>
-        </ion-item>
-      </ng-container>
-    </ion-item-group>
-    </ion-content>
+  <ion-item-group>
+    <ion-item-divider>
+      <h3>Details</h3>
+    </ion-item-divider>
+    <ion-item position="stacked" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Title : </b>{{book?.Title}}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" lines="full">
+      <ion-label>
+        <b>Type : </b>{{book?.Type | titlecase}}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" *ngIf="book?.Category" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Category : </b>{{book?.Category }}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" *ngIf="book?.Genre" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Genre : </b>{{book?.Genre}}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" *ngIf="book?.Desc" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Description : </b>{{book?.Desc}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Price : </b>${{book?.Price}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Copies available : </b>{{book?.Quantity}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>ISBN : </b>{{book?.Isbn}}
+      </ion-label>
+    </ion-item>
+  </ion-item-group>
+  <ion-button class="ion-padding" (click)="goToOrderPage([book?.Isbn])" expand="block" size="medium" color="medium"> Create order</ion-button>
+</ion-content>
 
 <ion-footer>
   <ion-toolbar footer_style>

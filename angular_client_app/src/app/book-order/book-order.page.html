@@ -1,9 +1,93 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>book-order</ion-title>
+  <ion-toolbar header_style>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/book')">
+        <ion-icon name="arrow-back-outline" size="lg" slot="start"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title><b>Book order</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-item-group>
+    <ion-item-divider>
+      <h3>Order details</h3>
+    </ion-item-divider>
+    <ion-item position="stacked" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Title : </b>{{book?.Title}}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" lines="full">
+      <ion-label>
+        <b>Type : </b>{{book?.Type | titlecase}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>ISBN : </b>{{book?.Isbn}}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" *ngIf="book?.Category" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Category : </b>{{book?.Category }}
+      </ion-label>
+    </ion-item>
+    <ion-item position="stacked" *ngIf="book?.Genre" lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Genre : </b>{{book?.Genre}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Price : </b>${{book?.Price}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap" lines="full">
+        <b>Date : </b> {{this.moment(current_date).utc().format("DD/MM/YYYY hh:mm a")}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap" lines="full">
+        <b>Quantity : </b>
+      </ion-label>
+      <ion-input type="number" onkeydown="return false" min="0">
+        <!-- {{order.Quantity}} -->
+      </ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label class="ion-text-wrap">
+        <b>Total : </b>{{order_total}}
+      </ion-label>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>
+      <h3>Customer details</h3>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label class="ion-text-wrap" lines="full">
+        <b>Name : </b>
+      </ion-label>
+      <ion-input type="text" maxlength="100">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap" lines="full">
+        <b>Email : </b>
+      </ion-label>
+      <ion-input type="text" maxlength="255">
+      </ion-input>
+    </ion-item>
+  </ion-item-group>
+  <ion-button class="ion-padding" expand="block" size="medium" color="medium"> Place Order</ion-button>
+  <!-- (click)="" -->
+  <br />
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar footer_style>
+  </ion-toolbar>
+</ion-footer>

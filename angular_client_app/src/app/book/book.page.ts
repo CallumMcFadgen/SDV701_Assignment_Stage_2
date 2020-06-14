@@ -35,19 +35,19 @@ export class BookPage implements OnInit {
     this.loadBook();
   }
 
-    // SET THE BOOK ID FOR API ROUTE
-    async setBookID() {
-      await this.storage.get('book_id').then((prBookNumber) => {
-        this.book_id = prBookNumber;
-        console.log(this.book_id);
-      });
-    }
+  // SET THE BOOK ID FOR API ROUTE
+  async setBookID() {
+    await this.storage.get('book_id').then((prBookNumber) => {
+      this.book_id = prBookNumber;
+      console.log(this.book_id);
+    });
+  }
 
-  // SET ID TO STORAGE AND NAVIGATE TO BOOK PAGE
-  // goToBookPage(prBookNumber: any) {
-  //   this.storage.set('book_id', prBookNumber);
-  //   this.router.navigate(['/book']);
-  // }
+  // SET ID TO STORAGE AND NAVIGATE TO ORDER PAGE
+  goToOrderPage(prBookNumber: any) {
+    this.storage.set('book_id', prBookNumber);
+    this.router.navigate(['/book-order']);
+  }
 
   // LOAD AUTHOR OBJECT FROM API ROUTE
   async loadBook() {
@@ -93,8 +93,4 @@ export class BookPage implements OnInit {
       this.router.navigateByUrl(default_href);
     }
   }
-
-
-
-
 }

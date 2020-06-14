@@ -26,7 +26,8 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 [header_style] {
-    --background: #a6a8a5 !important;
+    --background: #92949c !important;
+    --color : white !important;
 }
 
 [main_heading_style] {
@@ -45,6 +46,10 @@
 }
 
 [footer_style] {
-    --background: #a6a8a5 !important;
+    --background: #92949c !important;
     height: 4vh;
+}
+
+[text_style] {
+    --color: #4a4b49 !important;
 }

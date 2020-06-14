@@ -6,22 +6,22 @@
       </ion-button>
   </ion-buttons>
     <ion-title><b>{{author?.Name}}</b></ion-title>
-    <ion-title>Joined {{this.moment(author?.JoinDate).utc().format("D/MM/YYYY")}}</ion-title>
+    <!-- <ion-title>Joined {{this.moment(author?.JoinDate).utc().format("D/MM/YYYY")}}</ion-title> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-item-group>
       <ion-item-divider>
-        <h3>Published works</h3>
+        <h3 >Published works</h3>
       </ion-item-divider>
       <ng-container *ngFor="let book of author?.BookList">
         <ion-item detail="true" (click)="goToBookPage([book.Isbn])" routerDirection="forward" lines="full">
           <ion-icon size="large" slot="start" name="book"></ion-icon>
         <ion-label>
-          <p><b>{{book.Title}}</b></p>
-          <p>{{book.Type}}</p>
-          <p>${{book.Price}}</p>
+          <p style="color: black;"><b>{{book.Title}}</b></p>
+          <p style="color: black;">{{book.Type}}</p>
+          <p style="color: black;">${{book.Price}}</p>
           </ion-label>
         </ion-item>
       </ng-container>
