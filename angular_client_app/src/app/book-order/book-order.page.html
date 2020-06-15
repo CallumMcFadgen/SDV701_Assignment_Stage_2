@@ -46,15 +46,15 @@
     </ion-item>
     <ion-item>
       <ion-label class="ion-text-wrap" lines="full">
-        <b>Date : </b> {{this.moment(current_date).utc().format("DD/MM/YYYY hh:mm a")}}
+        <b>Date : </b> {{current_date}}
+        <!-- <b>Date : </b> {{this.moment(order.OrderDate).utc().format("DD/MM/YYYY hh:mm a")}} -->
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label class="ion-text-wrap" lines="full">
         <b>Quantity : </b>
       </ion-label>
-      <ion-input type="number" onkeydown="return false" min="0">
-        <!-- {{order.Quantity}} -->
+      <ion-input type="number" onkeydown="return false" min="1" [(ngModel)]="order['Quantity']"  (ngModelChange)="setOrderTotal()">
       </ion-input>
     </ion-item>
     <ion-item lines="full">
@@ -71,19 +71,18 @@
       <ion-label class="ion-text-wrap" lines="full">
         <b>Name : </b>
       </ion-label>
-      <ion-input type="text" maxlength="100">
+      <ion-input type="text" maxlength="100" [(ngModel)]="order['Name']">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label class="ion-text-wrap" lines="full">
         <b>Email : </b>
       </ion-label>
-      <ion-input type="text" maxlength="255">
+      <ion-input type="text" maxlength="255" [(ngModel)]="order['Email']">
       </ion-input>
     </ion-item>
   </ion-item-group>
-  <ion-button class="ion-padding" expand="block" size="medium" color="medium"> Place Order</ion-button>
-  <!-- (click)="" -->
+  <ion-button class="ion-padding" expand="block" size="medium" color="medium" (click)="postBookOrder()"> Place Order</ion-button>
   <br />
 </ion-content>
 

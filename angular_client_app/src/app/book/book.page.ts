@@ -80,9 +80,9 @@ export class BookPage implements OnInit {
   // API URL
   private getBook(): Observable<object> {
     const id = this.book_id;
-    const dataUrl = 'http://localhost:60064/api/store/GetBook?Isbn=' + id;
+    const dataUrl = 'http://localhost:60064/api/store/GetBook?Isbn=';
     console.log(dataUrl);
-    return this.http.get(dataUrl);
+    return this.http.get(dataUrl + id);
   }
 
   goBack(default_href) {
