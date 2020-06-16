@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace windows_admin_app
 {
@@ -41,6 +42,30 @@ namespace windows_admin_app
             _Book.Category = txtCategory.Text;
         }
 
+        private bool isCategoryValid()
+        {
+            if (string.IsNullOrWhiteSpace(txtCategory.Text))
+            {
+                MessageBox.Show("Please enter a genre");
+                return false;
+            }
+
+            return true;
+        }
+
+        // CHECK FOR FIELD CHANGES
+        protected override bool isChanged()
+        {
+            if (base.isChanged() || txtCategory.Text != _Book.Category)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
     }
 }

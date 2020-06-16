@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace windows_admin_app
 {
@@ -40,5 +41,31 @@ namespace windows_admin_app
             _Book.EditDate = DateTime.Now;
             _Book.Genre = txtGenre.Text;
         }
+
+        private bool isGenreValid()
+        {
+            if (string.IsNullOrWhiteSpace(txtGenre.Text))
+            {
+                MessageBox.Show("Please enter a genre");
+                return false;
+            }
+
+            return true;
+        }
+
+        // CHECK FOR FIELD CHANGES
+        protected override bool isChanged()
+        {
+            if (base.isChanged() || txtGenre.Text != _Book.Genre)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
     }
 }

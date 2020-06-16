@@ -43,6 +43,7 @@ namespace windows_admin_app
                     _AuthorFormList.Add(prAuthorName, lcAuthorForm);
                     lcAuthorForm.refreshFormFromDB(prAuthorName);
                     lcAuthorForm.DisableTextFields();
+                    //getAuthorTotal(lcAuthorForm);       //working on
                 }
             }
             else
@@ -55,6 +56,8 @@ namespace windows_admin_app
         #endregion
 
         #region METHODS
+
+        // DISABLE INPUT FIELDS IF NOT NEEDED
         private void DisableTextFields()
         {
             dateJoinDate.Enabled = false;
@@ -63,7 +66,14 @@ namespace windows_admin_app
 
         private async void refreshFormFromDB(string prAuthorName)
         {
-            SetDetails(await ServiceClient.GetAuthorAsync(prAuthorName));
+            try
+            {
+                SetDetails(await ServiceClient.GetAuthorAsync(prAuthorName));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void UpdateDisplay()
@@ -78,9 +88,19 @@ namespace windows_admin_app
 
         public void UpdateForm()
         {
+            decimal lctotal = 0;
+
             txtName.Text = _Author.Name;
             txtEmail.Text = _Author.Email;
             dateJoinDate.Value = _Author.JoinDate.ToUniversalTime();
+
+            for (var i = 0; i < _Author.BookList.Count; i++)
+            {
+                lctotal += (_Author.BookList[i].Price * _Author.BookList[i].Quantity);
+            }
+
+            lblAuthorTotal.Text = ("$" + lctotal.ToString());
+
         }
 
         public void SetDetails(clsAuthor prAuthor)
@@ -97,10 +117,11 @@ namespace windows_admin_app
             _Author.Name = txtName.Text;
             _Author.Email = txtEmail.Text;
             _Author.JoinDate = dateJoinDate.Value;
-        } 
+        }
         #endregion
 
         #region UI METHODS
+
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             string lcReply = new frmBookType().Answer;
@@ -110,6 +131,7 @@ namespace windows_admin_app
                 if (!string.IsNullOrEmpty(lcReply))
                 {
                     clsBook lcBook = clsBook.NewBook(lcReply);
+
                     if (lcBook != null)
                     {
                         if (txtName.Enabled)
@@ -154,41 +176,60 @@ namespace windows_admin_app
         {
             int lcIndex = lbxBooks.SelectedIndex;
 
-            if (lcIndex >= 0 && MessageBox.Show("Are you sure?", "Deleting Book", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            try
             {
-                MessageBox.Show(await ServiceClient.DeleteBookAsync(lbxBooks.SelectedItem as clsBook));
-                refreshFormFromDB(_Author.Name);
-                frmMain.Instance.UpdateDisplay();
+                if (lcIndex >= 0 && MessageBox.Show("Are you sure?", "Deleting Book", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    MessageBox.Show(await ServiceClient.DeleteBookAsync(lbxBooks.SelectedItem as clsBook));
+                    refreshFormFromDB(_Author.Name);
+                    frmMain.Instance.UpdateDisplay();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
+
         private async void btnClose_Click(object sender, EventArgs e)
         {
-            if (isNameValid() == true && isEmailValid() == true)
-                try
+            if (isChanged() == true)
+            {
+                if (isNameValid() == true && isEmailValid() == true)
                 {
-                    pushData();
-                    if (txtName.Enabled)
+                    try
                     {
-                        MessageBox.Show(await ServiceClient.InsertAuthorAsync(_Author));
-                        frmMain.Instance.UpdateDisplay();
-                        txtName.Enabled = false;
-                        dateJoinDate.Enabled = false;
+                        pushData();
+
+                        if (txtName.Enabled)
+                        {
+                            MessageBox.Show(await ServiceClient.InsertAuthorAsync(_Author));
+                            frmMain.Instance.UpdateDisplay();
+                            txtName.Enabled = false;
+                            dateJoinDate.Enabled = false;
+                        }
+                        else
+                            MessageBox.Show(await ServiceClient.UpdateAuthorAsync(_Author));
+                        Hide();
                     }
-                    else
-                        MessageBox.Show(await ServiceClient.UpdateAuthorAsync(_Author));
-                    Hide();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-        } 
+            }
+            else
+            {
+                Hide();
+            }
+        }
 
         #endregion
 
         #region INPUT VALIDATION
 
+        // CHECK NAME FOR NULL OR EMPTY
         private bool isNameValid()
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -198,8 +239,9 @@ namespace windows_admin_app
             }
 
             return true;
-        } 
+        }
 
+        // CHECK EMAIL FOR NULL OR EMPTY
         private bool isEmailValid()
         {
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
@@ -207,11 +249,22 @@ namespace windows_admin_app
                 MessageBox.Show("Please enter an email address");
                 return false;
             }
-            
-                return true;
+
+            return true;
         }
 
         #endregion
+
+        // CHECK FOR FIELD CHANGES
+        private bool isChanged()
+        {
+            if (txtEmail.Text != _Author.Email)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
     }
 }

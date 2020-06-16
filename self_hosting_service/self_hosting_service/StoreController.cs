@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Web.Http.Cors;
 
 namespace self_hosting_service
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*", exposedHeaders: "*")]
+
     public class StoreController : System.Web.Http.ApiController
     {
         #region PARAMETER CONFIGURATION
@@ -17,19 +20,31 @@ namespace self_hosting_service
             return par;
         }
 
-        private Dictionary<string, object> prepareBookParameters(clsBook prBook)
+        private Dictionary<string, object> prepareBookParameters(clsBook Book)
         {
             Dictionary<string, object> par = new Dictionary<string, object>(10);
-            par.Add("Isbn", prBook.Isbn);
-            par.Add("Type", prBook.Type);
-            par.Add("Title", prBook.Title);
-            par.Add("Desc", prBook.Desc);
-            par.Add("Price", prBook.Price);
-            par.Add("Quantity", prBook.Quantity);
-            par.Add("EditDate", prBook.EditDate);
-            par.Add("Genre", prBook.EditDate);
-            par.Add("Category", prBook.Category);
-            par.Add("AuthorName", prBook.AuthorName);
+            par.Add("Isbn", Book.Isbn);
+            par.Add("Type", Book.Type);
+            par.Add("Title", Book.Title);
+            par.Add("Desc", Book.Desc);
+            par.Add("Price", Book.Price);
+            par.Add("Quantity", Book.Quantity);
+            par.Add("EditDate", Book.EditDate);
+            par.Add("Genre", Book.Genre);
+            par.Add("Category", Book.Category);
+            par.Add("AuthorName", Book.AuthorName);
+            return par;
+        }
+
+        private Dictionary<string, object> prepareOrderParameters(clsOrder Order)
+        {
+            Dictionary<string, object> par = new Dictionary<string, object>(6);
+            par.Add("Name", Order.Name);
+            par.Add("Email", Order.Email);
+            par.Add("OrderDate", Order.OrderDate);
+            par.Add("Price", Order.Price);
+            par.Add("Quantity", Order.Quantity);
+            par.Add("Isbn", Order.Isbn);
             return par;
         }
 
@@ -38,6 +53,13 @@ namespace self_hosting_service
             Dictionary<string, object> par = new Dictionary<string, object>(2);
             par.Add("Isbn", prIsbn);
             par.Add("AuthorName", prAuthorName);
+            return par;
+        }
+
+        private Dictionary<string, object> prepareDeleteOrderParameters(string prNumber)
+        {
+            Dictionary<string, object> par = new Dictionary<string, object>(2);
+            par.Add("Number", prNumber);
             return par;
         }
 
@@ -63,13 +85,28 @@ namespace self_hosting_service
             };
         }
 
+        private clsOrder formatOrderData(DataRow DataRow)
+        {
+            Console.Write("formatOrderData called" + "\n" + "\n");
+            return new clsOrder()
+            {
+                Number = Convert.ToInt32(DataRow["order_number"]),
+                Name = Convert.ToString(DataRow["customer_name"]),
+                Email = Convert.ToString(DataRow["email_address"]),
+                OrderDate = Convert.ToDateTime(DataRow["order_date"]),
+                Price = Convert.ToDecimal(DataRow["item_price"]),
+                Quantity = Convert.ToInt32(DataRow["quantity"]),
+                Isbn = Convert.ToString(DataRow["isbn_number"])
+            };
+        }
+
         #endregion
 
         #region GET APIs
 
         public List<string> GetAuthorNames()
         {
-            DataTable lcResult = clsDbConnection.GetDataTable("SELECT author_name FROM author", null);
+            DataTable lcResult = clsDbConnection.GetDataTable("SELECT author_name FROM author ORDER BY author_name ASC", null);
             List<string> lcNames = new List<string>();
             Console.Write("GetAuthorNames called" + "\n" + "\n");
 
@@ -78,7 +115,7 @@ namespace self_hosting_service
             return lcNames;
         }
 
-        public clsAuthor GetAuthor(string Name)
+         public clsAuthor GetAuthor(string Name)
         {
             Dictionary<string, object> par = new Dictionary<string, object>(1);
             par.Add("Name", Name);
@@ -98,11 +135,37 @@ namespace self_hosting_service
                 return null;
         }
 
+        public clsBook GetBook(string Isbn)
+        {
+            Dictionary<string, object> par = new Dictionary<string, object>(1);
+            par.Add("Isbn", Isbn);
+            DataTable lcResult =
+            clsDbConnection.GetDataTable("SELECT * FROM book WHERE isbn_number = @Isbn", par);
+            Console.Write("GetBook called" + "\n" + "\n");
+
+            if (lcResult.Rows.Count > 0)
+                return new clsBook()
+                {
+                    Isbn = (string)lcResult.Rows[0]["isbn_number"],
+                    Type = (string)lcResult.Rows[0]["type"],
+                    Title = (string)lcResult.Rows[0]["title"],
+                    Desc = (string)lcResult.Rows[0]["description"],
+                    Price = (decimal)lcResult.Rows[0]["price"],
+                    Quantity = (int)lcResult.Rows[0]["quantity"],
+                    EditDate = (DateTime)lcResult.Rows[0]["edit_date"],
+                    Genre = (string)lcResult.Rows[0]["genre"],
+                    Category = (string)lcResult.Rows[0]["category"],
+                    AuthorName = (string)lcResult.Rows[0]["author_name"]
+                };
+            else
+                return null;
+        }
+
         public List<clsBook> getAuthorBooks(string Name)
         {
             Dictionary<string, object> par = new Dictionary<string, object>(1);
             par.Add("Name", Name);
-            DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book WHERE author_name = @Name", par);
+            DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book WHERE author_name = @Name ORDER BY title ASC", par);
             List<clsBook> lcBooks = new List<clsBook>();
             Console.Write("getAuthorBooks called" + "\n" + "\n");
 
@@ -111,14 +174,26 @@ namespace self_hosting_service
             return lcBooks;
         }
 
-        public List<clsBook> GetBookOrderDetails()
+        public List<clsOrder> getOrders()
         {
-            DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book_order", null);
-            List<clsBook> lcDetails = new List<clsBook>();
+            Dictionary<string, object> par = new Dictionary<string, object>(1);
+            DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book_order ORDER BY order_date DESC", null);
+            List<clsOrder> lcOrders = new List<clsOrder>();
+            Console.Write("getOrders called" + "\n" + "\n");
+
+            foreach (DataRow dr in lcResult.Rows)
+                lcOrders.Add(formatOrderData(dr));
+            return lcOrders;
+        }
+
+        public List<clsOrder> GetOrderDetails()
+        {
+            DataTable lcResult = clsDbConnection.GetDataTable("SELECT * FROM book_order ORDER BY order_date ASC", null);
+            List<clsOrder> lcDetails = new List<clsOrder>();
             Console.Write("getBookOrderDetails called" + "\n" + "\n");
 
             foreach (DataRow dr in lcResult.Rows)
-                lcDetails.Add((clsBook)dr[0]);
+                lcDetails.Add((clsOrder)dr[0]);
             return lcDetails;
         }
 
@@ -196,6 +271,24 @@ namespace self_hosting_service
             }
         }
 
+        public string PutBookQuantity(clsBook Book)
+        {
+            try
+            {
+                int lcRecCount = clsDbConnection.Execute(
+                "UPDATE book SET quantity = quantity - @Quantity, edit_date = @EditDate WHERE isbn_number = @Isbn and quantity >= @Quantity",
+                prepareBookParameters(Book));
+                if (lcRecCount == 1)
+                    return "Success";
+                else
+                    return "Failure";
+            }
+            catch (Exception ex)
+            {
+                return ex.GetBaseException().Message;
+            }
+        }
+
         #endregion
 
         #region POST APIs
@@ -238,10 +331,30 @@ namespace self_hosting_service
             }
         }
 
+        public string PostOrder(clsOrder Order)
+        {
+            try
+            {
+                int lcRecCount = clsDbConnection.Execute(
+                "INSERT INTO book_order (customer_name, email_address, order_date, item_price, quantity, isbn_number)" +
+                "VALUES ( @Name, @Email, @OrderDate, @Price, @Quantity, @Isbn )",
+                prepareOrderParameters(Order));
+
+                if (lcRecCount == 1)
+                    return "New order record created";
+                else
+                    return "Unexpected order addition count: " + lcRecCount;
+            }
+            catch (Exception ex)
+            {
+                return ex.GetBaseException().Message;
+            }
+        }
+
         #endregion
 
-
         #region DELETE APIs
+
         public string DeleteBook(string Isbn, string AuthorName)
         {
             try
@@ -259,9 +372,27 @@ namespace self_hosting_service
             {
                 return ex.GetBaseException().Message;
             }
-        } 
+        }
+
+        public string DeleteOrder(string Number)
+        {
+            try
+            {
+                int lcRecCount = clsDbConnection.Execute(
+                    "DELETE FROM book_order WHERE order_number = @Number",
+                    prepareDeleteOrderParameters(Number));
+
+                if (lcRecCount == 1)
+                    return "One order deleted";
+                else
+                    return "Unexpected order deletion count: " + lcRecCount;
+            }
+            catch (Exception ex)
+            {
+                return ex.GetBaseException().Message;
+            }
+        }
+
         #endregion
-
-
     }
 }

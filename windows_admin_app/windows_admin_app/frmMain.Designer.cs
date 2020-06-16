@@ -30,20 +30,20 @@
         {
             this.lbxAuthor = new System.Windows.Forms.ListBox();
             this.lbxOrders = new System.Windows.Forms.ListBox();
-            this.rbtnAuthorDate = new System.Windows.Forms.RadioButton();
-            this.rbtnAuthorName = new System.Windows.Forms.RadioButton();
             this.lblAuthorHeading = new System.Windows.Forms.Label();
             this.lblOrdersHeading = new System.Windows.Forms.Label();
             this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.lblOrderTotalHeading = new System.Windows.Forms.Label();
             this.lblOrderTotal = new System.Windows.Forms.Label();
-            this.gbxAuthorSort = new System.Windows.Forms.GroupBox();
-            this.gbxOrderSort = new System.Windows.Forms.GroupBox();
-            this.rbtnOrderDate = new System.Windows.Forms.RadioButton();
-            this.rbtnOrderName = new System.Windows.Forms.RadioButton();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.gbxAuthorSort.SuspendLayout();
-            this.gbxOrderSort.SuspendLayout();
+            this.lblOrderNumber = new System.Windows.Forms.Label();
+            this.lblOrderName = new System.Windows.Forms.Label();
+            this.lblOrderEmail = new System.Windows.Forms.Label();
+            this.lblOrderPrice = new System.Windows.Forms.Label();
+            this.lblOrderDate = new System.Windows.Forms.Label();
+            this.lblOrderQuantity = new System.Windows.Forms.Label();
+            this.lblOrderISBN = new System.Windows.Forms.Label();
+            this.lblOrderTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbxAuthor
@@ -51,10 +51,10 @@
             this.lbxAuthor.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxAuthor.FormattingEnabled = true;
             this.lbxAuthor.ItemHeight = 18;
-            this.lbxAuthor.Location = new System.Drawing.Point(35, 60);
+            this.lbxAuthor.Location = new System.Drawing.Point(42, 60);
             this.lbxAuthor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxAuthor.Name = "lbxAuthor";
-            this.lbxAuthor.Size = new System.Drawing.Size(265, 472);
+            this.lbxAuthor.Size = new System.Drawing.Size(230, 472);
             this.lbxAuthor.TabIndex = 0;
             this.lbxAuthor.DoubleClick += new System.EventHandler(this.lbxAuthor_DoubleClick);
             // 
@@ -63,43 +63,17 @@
             this.lbxOrders.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxOrders.FormattingEnabled = true;
             this.lbxOrders.ItemHeight = 18;
-            this.lbxOrders.Location = new System.Drawing.Point(469, 60);
+            this.lbxOrders.Location = new System.Drawing.Point(322, 82);
             this.lbxOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxOrders.Name = "lbxOrders";
-            this.lbxOrders.Size = new System.Drawing.Size(532, 436);
+            this.lbxOrders.Size = new System.Drawing.Size(1121, 382);
             this.lbxOrders.TabIndex = 1;
-            // 
-            // rbtnAuthorDate
-            // 
-            this.rbtnAuthorDate.AutoSize = true;
-            this.rbtnAuthorDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnAuthorDate.Location = new System.Drawing.Point(19, 75);
-            this.rbtnAuthorDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbtnAuthorDate.Name = "rbtnAuthorDate";
-            this.rbtnAuthorDate.Size = new System.Drawing.Size(59, 21);
-            this.rbtnAuthorDate.TabIndex = 5;
-            this.rbtnAuthorDate.TabStop = true;
-            this.rbtnAuthorDate.Text = "Date";
-            this.rbtnAuthorDate.UseVisualStyleBackColor = true;
-            // 
-            // rbtnAuthorName
-            // 
-            this.rbtnAuthorName.AutoSize = true;
-            this.rbtnAuthorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnAuthorName.Location = new System.Drawing.Point(19, 48);
-            this.rbtnAuthorName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbtnAuthorName.Name = "rbtnAuthorName";
-            this.rbtnAuthorName.Size = new System.Drawing.Size(66, 21);
-            this.rbtnAuthorName.TabIndex = 4;
-            this.rbtnAuthorName.TabStop = true;
-            this.rbtnAuthorName.Text = "Name";
-            this.rbtnAuthorName.UseVisualStyleBackColor = true;
             // 
             // lblAuthorHeading
             // 
             this.lblAuthorHeading.AutoSize = true;
             this.lblAuthorHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuthorHeading.Location = new System.Drawing.Point(107, 11);
+            this.lblAuthorHeading.Location = new System.Drawing.Point(92, 11);
             this.lblAuthorHeading.Name = "lblAuthorHeading";
             this.lblAuthorHeading.Size = new System.Drawing.Size(120, 36);
             this.lblAuthorHeading.TabIndex = 3;
@@ -109,7 +83,7 @@
             // 
             this.lblOrdersHeading.AutoSize = true;
             this.lblOrdersHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrdersHeading.Location = new System.Drawing.Point(695, 11);
+            this.lblOrdersHeading.Location = new System.Drawing.Point(726, 11);
             this.lblOrdersHeading.Name = "lblOrdersHeading";
             this.lblOrdersHeading.Size = new System.Drawing.Size(105, 36);
             this.lblOrdersHeading.TabIndex = 5;
@@ -118,90 +92,38 @@
             // btnDeleteOrder
             // 
             this.btnDeleteOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteOrder.Location = new System.Drawing.Point(1025, 202);
+            this.btnDeleteOrder.Location = new System.Drawing.Point(1210, 489);
             this.btnDeleteOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDeleteOrder.Name = "btnDeleteOrder";
             this.btnDeleteOrder.Size = new System.Drawing.Size(107, 49);
             this.btnDeleteOrder.TabIndex = 6;
             this.btnDeleteOrder.Text = "Delete";
             this.btnDeleteOrder.UseVisualStyleBackColor = true;
-            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // lblOrderTotalHeading
             // 
             this.lblOrderTotalHeading.AutoSize = true;
             this.lblOrderTotalHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderTotalHeading.Location = new System.Drawing.Point(524, 510);
+            this.lblOrderTotalHeading.Location = new System.Drawing.Point(322, 489);
             this.lblOrderTotalHeading.Name = "lblOrderTotalHeading";
-            this.lblOrderTotalHeading.Size = new System.Drawing.Size(159, 24);
+            this.lblOrderTotalHeading.Size = new System.Drawing.Size(168, 24);
             this.lblOrderTotalHeading.TabIndex = 7;
-            this.lblOrderTotalHeading.Text = "Total Order Value";
+            this.lblOrderTotalHeading.Text = "Total Orders Value";
             // 
             // lblOrderTotal
             // 
             this.lblOrderTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOrderTotal.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrderTotal.Location = new System.Drawing.Point(701, 509);
+            this.lblOrderTotal.Location = new System.Drawing.Point(499, 489);
             this.lblOrderTotal.Name = "lblOrderTotal";
-            this.lblOrderTotal.Size = new System.Drawing.Size(261, 25);
+            this.lblOrderTotal.Size = new System.Drawing.Size(199, 25);
             this.lblOrderTotal.TabIndex = 8;
-            // 
-            // gbxAuthorSort
-            // 
-            this.gbxAuthorSort.BackColor = System.Drawing.SystemColors.Control;
-            this.gbxAuthorSort.Controls.Add(this.rbtnAuthorDate);
-            this.gbxAuthorSort.Controls.Add(this.rbtnAuthorName);
-            this.gbxAuthorSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxAuthorSort.Location = new System.Drawing.Point(320, 50);
-            this.gbxAuthorSort.Name = "gbxAuthorSort";
-            this.gbxAuthorSort.Size = new System.Drawing.Size(106, 123);
-            this.gbxAuthorSort.TabIndex = 9;
-            this.gbxAuthorSort.TabStop = false;
-            this.gbxAuthorSort.Text = "Sort by";
-            // 
-            // gbxOrderSort
-            // 
-            this.gbxOrderSort.BackColor = System.Drawing.SystemColors.Control;
-            this.gbxOrderSort.Controls.Add(this.rbtnOrderDate);
-            this.gbxOrderSort.Controls.Add(this.rbtnOrderName);
-            this.gbxOrderSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxOrderSort.Location = new System.Drawing.Point(1025, 50);
-            this.gbxOrderSort.Name = "gbxOrderSort";
-            this.gbxOrderSort.Size = new System.Drawing.Size(106, 123);
-            this.gbxOrderSort.TabIndex = 10;
-            this.gbxOrderSort.TabStop = false;
-            this.gbxOrderSort.Text = "Sort by";
-            // 
-            // rbtnOrderDate
-            // 
-            this.rbtnOrderDate.AutoSize = true;
-            this.rbtnOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnOrderDate.Location = new System.Drawing.Point(19, 75);
-            this.rbtnOrderDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbtnOrderDate.Name = "rbtnOrderDate";
-            this.rbtnOrderDate.Size = new System.Drawing.Size(59, 21);
-            this.rbtnOrderDate.TabIndex = 5;
-            this.rbtnOrderDate.TabStop = true;
-            this.rbtnOrderDate.Text = "Date";
-            this.rbtnOrderDate.UseVisualStyleBackColor = true;
-            // 
-            // rbtnOrderName
-            // 
-            this.rbtnOrderName.AutoSize = true;
-            this.rbtnOrderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnOrderName.Location = new System.Drawing.Point(19, 48);
-            this.rbtnOrderName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbtnOrderName.Name = "rbtnOrderName";
-            this.rbtnOrderName.Size = new System.Drawing.Size(66, 21);
-            this.rbtnOrderName.TabIndex = 4;
-            this.rbtnOrderName.TabStop = true;
-            this.rbtnOrderName.Text = "Name";
-            this.rbtnOrderName.UseVisualStyleBackColor = true;
             // 
             // btnQuit
             // 
             this.btnQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuit.Location = new System.Drawing.Point(1024, 495);
+            this.btnQuit.Location = new System.Drawing.Point(1336, 489);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(107, 49);
@@ -210,14 +132,100 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // lblOrderNumber
+            // 
+            this.lblOrderNumber.AutoSize = true;
+            this.lblOrderNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderNumber.Location = new System.Drawing.Point(328, 60);
+            this.lblOrderNumber.Name = "lblOrderNumber";
+            this.lblOrderNumber.Size = new System.Drawing.Size(34, 20);
+            this.lblOrderNumber.TabIndex = 12;
+            this.lblOrderNumber.Text = "Nu.";
+            // 
+            // lblOrderName
+            // 
+            this.lblOrderName.AutoSize = true;
+            this.lblOrderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderName.Location = new System.Drawing.Point(440, 60);
+            this.lblOrderName.Name = "lblOrderName";
+            this.lblOrderName.Size = new System.Drawing.Size(53, 20);
+            this.lblOrderName.TabIndex = 13;
+            this.lblOrderName.Text = "Name";
+            // 
+            // lblOrderEmail
+            // 
+            this.lblOrderEmail.AutoSize = true;
+            this.lblOrderEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderEmail.Location = new System.Drawing.Point(675, 60);
+            this.lblOrderEmail.Name = "lblOrderEmail";
+            this.lblOrderEmail.Size = new System.Drawing.Size(51, 20);
+            this.lblOrderEmail.TabIndex = 14;
+            this.lblOrderEmail.Text = "Email";
+            // 
+            // lblOrderPrice
+            // 
+            this.lblOrderPrice.AutoSize = true;
+            this.lblOrderPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderPrice.Location = new System.Drawing.Point(1205, 60);
+            this.lblOrderPrice.Name = "lblOrderPrice";
+            this.lblOrderPrice.Size = new System.Drawing.Size(48, 20);
+            this.lblOrderPrice.TabIndex = 15;
+            this.lblOrderPrice.Text = "Price";
+            // 
+            // lblOrderDate
+            // 
+            this.lblOrderDate.AutoSize = true;
+            this.lblOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderDate.Location = new System.Drawing.Point(924, 60);
+            this.lblOrderDate.Name = "lblOrderDate";
+            this.lblOrderDate.Size = new System.Drawing.Size(45, 20);
+            this.lblOrderDate.TabIndex = 16;
+            this.lblOrderDate.Text = "Date";
+            // 
+            // lblOrderQuantity
+            // 
+            this.lblOrderQuantity.AutoSize = true;
+            this.lblOrderQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderQuantity.Location = new System.Drawing.Point(1292, 60);
+            this.lblOrderQuantity.Name = "lblOrderQuantity";
+            this.lblOrderQuantity.Size = new System.Drawing.Size(35, 20);
+            this.lblOrderQuantity.TabIndex = 17;
+            this.lblOrderQuantity.Text = "Qty";
+            // 
+            // lblOrderISBN
+            // 
+            this.lblOrderISBN.AutoSize = true;
+            this.lblOrderISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderISBN.Location = new System.Drawing.Point(1072, 60);
+            this.lblOrderISBN.Name = "lblOrderISBN";
+            this.lblOrderISBN.Size = new System.Drawing.Size(48, 20);
+            this.lblOrderISBN.TabIndex = 18;
+            this.lblOrderISBN.Text = "ISBN";
+            // 
+            // lblOrderTitle
+            // 
+            this.lblOrderTitle.AutoSize = true;
+            this.lblOrderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderTitle.Location = new System.Drawing.Point(1365, 60);
+            this.lblOrderTitle.Name = "lblOrderTitle";
+            this.lblOrderTitle.Size = new System.Drawing.Size(46, 20);
+            this.lblOrderTitle.TabIndex = 19;
+            this.lblOrderTitle.Text = "Total";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1165, 575);
+            this.ClientSize = new System.Drawing.Size(1487, 562);
+            this.Controls.Add(this.lblOrderTitle);
+            this.Controls.Add(this.lblOrderISBN);
+            this.Controls.Add(this.lblOrderQuantity);
+            this.Controls.Add(this.lblOrderDate);
+            this.Controls.Add(this.lblOrderPrice);
+            this.Controls.Add(this.lblOrderEmail);
+            this.Controls.Add(this.lblOrderName);
+            this.Controls.Add(this.lblOrderNumber);
             this.Controls.Add(this.btnQuit);
-            this.Controls.Add(this.gbxOrderSort);
-            this.Controls.Add(this.gbxAuthorSort);
             this.Controls.Add(this.lblOrderTotal);
             this.Controls.Add(this.lblOrderTotalHeading);
             this.Controls.Add(this.btnDeleteOrder);
@@ -227,12 +235,9 @@
             this.Controls.Add(this.lbxAuthor);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "The Writers Collective";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.gbxAuthorSort.ResumeLayout(false);
-            this.gbxAuthorSort.PerformLayout();
-            this.gbxOrderSort.ResumeLayout(false);
-            this.gbxOrderSort.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,17 +248,19 @@
         private System.Windows.Forms.ListBox lbxAuthor;
         private System.Windows.Forms.ListBox lbxOrders;
         private System.Windows.Forms.Label lblAuthorHeading;
-        private System.Windows.Forms.RadioButton rbtnAuthorDate;
-        private System.Windows.Forms.RadioButton rbtnAuthorName;
         private System.Windows.Forms.Label lblOrdersHeading;
         private System.Windows.Forms.Button btnDeleteOrder;
         private System.Windows.Forms.Label lblOrderTotalHeading;
         private System.Windows.Forms.Label lblOrderTotal;
-        private System.Windows.Forms.GroupBox gbxAuthorSort;
-        private System.Windows.Forms.GroupBox gbxOrderSort;
-        private System.Windows.Forms.RadioButton rbtnOrderDate;
-        private System.Windows.Forms.RadioButton rbtnOrderName;
         private System.Windows.Forms.Button btnQuit;
+        private System.Windows.Forms.Label lblOrderNumber;
+        private System.Windows.Forms.Label lblOrderName;
+        private System.Windows.Forms.Label lblOrderEmail;
+        private System.Windows.Forms.Label lblOrderPrice;
+        private System.Windows.Forms.Label lblOrderDate;
+        private System.Windows.Forms.Label lblOrderQuantity;
+        private System.Windows.Forms.Label lblOrderISBN;
+        private System.Windows.Forms.Label lblOrderTitle;
     }
 }
 

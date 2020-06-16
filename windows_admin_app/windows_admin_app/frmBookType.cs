@@ -14,15 +14,17 @@ namespace windows_admin_app
             ShowDialog();
         }
 
+        // CONFIGURE THE COMBOBOX
         private void setComboBox()
         {
-            cmbBookSelect.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbBookSelect.Items.Add("non-fiction");
             cmbBookSelect.Items.Add("fiction");
-            cmbBookSelect.SelectedItem = "fiction";
+            cmbBookSelect.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbBookSelect.SelectedItem = "non-fiction";
             cmbBookSelect.Focus();
         }
 
+        // VALIDATION CHECK THEN PASS RESULT
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (isValid())
@@ -32,17 +34,20 @@ namespace windows_admin_app
             }
         }
 
+        // CLOSE FORM
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
+        // GET ANSWER VALUE
         public string Answer
         {
             get { return _Answer; }
         }
 
+        // CHECKS FOR AN EMPTY OR NULL SELECTION
         private bool isValid()
         {
             if (string.IsNullOrEmpty(cmbBookSelect.Text))

@@ -16,7 +16,6 @@ namespace self_hosting_service
     }
     #endregion
 
-
     #region BOOK DTO
 	public class clsBook
     {
@@ -33,7 +32,6 @@ namespace self_hosting_service
     } 
 	#endregion
 
-
     #region ORDER DTO
 	public class clsOrder
     {
@@ -46,6 +44,5 @@ namespace self_hosting_service
         public string Isbn { get; set; }
     } 
 	#endregion
-
 
 }

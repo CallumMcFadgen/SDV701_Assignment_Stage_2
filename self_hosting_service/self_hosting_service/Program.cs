@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.SelfHost;
 
 namespace self_hosting_service
@@ -20,6 +21,7 @@ namespace self_hosting_service
             routeTemplate: "api/{controller}/{action}/{id}",
             defaults: new { id = RouteParameter.Optional }
             );
+            config.EnableCors(new EnableCorsAttribute("*", headers: "*", methods: "*"));
 
             // CREATE SERVER
             HttpSelfHostServer server = new HttpSelfHostServer(config);

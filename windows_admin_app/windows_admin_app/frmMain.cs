@@ -12,6 +12,7 @@ namespace windows_admin_app
 {
     public sealed partial class frmMain : Form
     {
+
         #region Singleton Pattern
 
         private static readonly frmMain _Instance = new frmMain();
@@ -29,27 +30,38 @@ namespace windows_admin_app
 
         #region LOAD METHOD
 
+        // UPDATE DISPLAY ON FORM LOAD
         private void frmMain_Load(object sender, EventArgs e)
         {
             UpdateDisplay();
-        } 
+        }
 
         #endregion
 
+        // SET UI ELEMENTS TO VALUES
         public async void UpdateDisplay()
         {
-            List<string> lcauthors = new List<string>();
-            lcauthors = await ServiceClient.GetAuthorNamesAsync();
-
-            //List<string> lcorders = new List<string>();
-            //lcorders = await ServiceClient.GetOrderDetailsAsync();
+            decimal lctotal = 0;
 
             try
             {
+                List<string> lcauthors = new List<string>();
+                lcauthors = await ServiceClient.GetAuthorNamesAsync();
+                List<clsOrder> lcorders = new List<clsOrder>();
+                lcorders = await ServiceClient.GetOrdersAsync();
+
                 lbxAuthor.DataSource = null;
                 lbxOrders.DataSource = null;
                 lbxAuthor.DataSource = lcauthors;
-                //lbxOrders.DataSource = lcorders;
+                lbxOrders.DataSource = lcorders;
+
+                for (var i = 0; i < lcorders.Count; i++)
+                {
+                   lctotal += (lcorders[i].Price * lcorders[i].Quantity);
+                }
+
+                lblOrderTotal.Text = ("$" + lctotal.ToString());
+
             }
             catch (Exception ex)
             {
@@ -57,29 +69,10 @@ namespace windows_admin_app
             }
         }
 
-        //class ClsNameComparer : IComparer<_authors>      //name comparer
-        //{
-        //    public int Compare(_authors prActivityX, _authors prActivityY)
-        //    {
-        //        return prActivityX.Name.CompareTo(prActivityY.Name);
-        //    }
-        //}
 
         #region UI METHODS
 
-        // CURRENTLY NOT IMPLEMENTED
-        //private void btnAdd_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        frmAuthor.Run(null);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
+        // OPEN THE SELECTED ARTISTS FORM
         private void lbxAuthor_DoubleClick(object sender, EventArgs e)
         {
             string lcKey;
@@ -92,36 +85,31 @@ namespace windows_admin_app
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "This should never occur");
+                    MessageBox.Show(ex.Message);
                 }
         }
 
-        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        // DELETE A SELECTED LISTBOX ITEM AND REFRESH DISPLAY
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            UpdateDisplay();
+            int lcIndex = lbxOrders.SelectedIndex;
+
+            try
+            {
+                if (lcIndex >= 0 && MessageBox.Show("Are you sure?", "Deleting Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    MessageBox.Show(await ServiceClient.DeleteOrderAsync(lbxOrders.SelectedItem as clsOrder));
+                    lbxOrders.ClearSelected();
+                    UpdateDisplay();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-
-        // CURRENTLY NOT IMPLEMENTED
-        //private async void btnDelete_Click(object sender, EventArgs e)
-        //{
-        //string lcKey;
-        //lcKey = Convert.ToString(lstArtists.SelectedItem);
-
-        //if (lcKey != null && MessageBox.Show("Deleting an artist can not be undone", "Are you sure",
-        //    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-        //    try
-        //    {
-        //        MessageBox.Show(await ServiceClient.DeleteArtist(lcKey));
-        //        lstArtists.ClearSelected();
-        //        UpdateDisplay();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Error deleting artist");
-        //    }
-        //}
-
+        // CLOSE APPLICATION
         private void btnQuit_Click(object sender, EventArgs e)
         {
             Close();

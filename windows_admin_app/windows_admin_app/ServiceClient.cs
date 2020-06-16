@@ -12,6 +12,7 @@ namespace windows_admin_app
     {
         #region GET ROUTES
 
+        // GET ALL AUTHOR NAMES
         internal async static Task<List<string>> GetAuthorNamesAsync()
         {
             using (HttpClient lcHttpClient = new HttpClient())
@@ -19,6 +20,7 @@ namespace windows_admin_app
                 (await lcHttpClient.GetStringAsync("http://localhost:60064/api/store/GetAuthorNames"));
         }
 
+        // GET AN INDIVIDUAL AUTHOR
         internal async static Task<clsAuthor> GetAuthorAsync(string prAuthorName)
         {
             using (HttpClient lcHttpClient = new HttpClient())
@@ -26,16 +28,19 @@ namespace windows_admin_app
                 (await lcHttpClient.GetStringAsync("http://localhost:60064/api/store/GetAuthor?Name=" + prAuthorName));
         }
 
-        internal async static Task<List<string>> GetOrderDetailsAsync()
+        // GET ALL ORDERS
+        internal async static Task<List<clsOrder>> GetOrdersAsync()
         {
             using (HttpClient lcHttpClient = new HttpClient())
-                return JsonConvert.DeserializeObject<List<string>>
-                (await lcHttpClient.GetStringAsync("http://localhost:60064/api/store/GetBookOrderDetails"));
+                return JsonConvert.DeserializeObject<List<clsOrder>>
+                (await lcHttpClient.GetStringAsync("http://localhost:60064/api/store/GetOrders"));
         }
 
         #endregion
 
         #region GENERIC INSERT/UPDATE METHOD
+
+        // MULTIPURPOSE INSERT/UPDATE METHOD 
         private async static Task<string> InsertOrUpdateAsync<TItem>(TItem prItem, string prUrl, string prRequest)
         {
             using (HttpRequestMessage lcReqMessage = new HttpRequestMessage(new HttpMethod(prRequest), prUrl))
@@ -52,11 +57,13 @@ namespace windows_admin_app
 
         #region POST ROUTES
 
+        // ADD A NEW AUTHOR
         internal async static Task<string> InsertAuthorAsync(clsAuthor prAuthor)
         {
             return await InsertOrUpdateAsync(prAuthor, "http://localhost:60064/api/store/PostAuthor", "POST");
         }
 
+        // ADD A NEW BOOK
         internal async static Task<string> InsertBookAsync(clsBook prBook)
         {
             return await InsertOrUpdateAsync(prBook, "http://localhost:60064/api/store/PostBook", "POST");
@@ -66,11 +73,13 @@ namespace windows_admin_app
 
         #region PUT ROUTES
 
+        // UPDATE AN AUTHOR
         internal async static Task<string> UpdateAuthorAsync(clsAuthor prAuthor)
         {
             return await InsertOrUpdateAsync(prAuthor, "http://localhost:60064/api/store/PutAuthor", "PUT");
         }
 
+        // UPDATE A BOOK
         internal async static Task<string> UpdateBookAsync(clsBook prBook)
         {
             return await InsertOrUpdateAsync(prBook, "http://localhost:60064/api/store/PutBook", "PUT");
@@ -78,7 +87,9 @@ namespace windows_admin_app
 
         #endregion
 
+        #region DELETE ROUTES
 
+        // DELETE AN AUTHORS BOOK
         internal async static Task<string> DeleteBookAsync(clsBook prBook)
         {
             using (HttpClient lcHttpClient = new HttpClient())
@@ -88,5 +99,19 @@ namespace windows_admin_app
                 return await lcRespMessage.Content.ReadAsStringAsync();
             }
         }
+
+        // DELETE AN ORDER
+        internal async static Task<string> DeleteOrderAsync(clsOrder prOrder)
+        {
+            using (HttpClient lcHttpClient = new HttpClient())
+            {
+                HttpResponseMessage lcRespMessage = await lcHttpClient.DeleteAsync
+                ($"http://localhost:60064/api/store/DeleteOrder?Number={prOrder.Number}");
+                return await lcRespMessage.Content.ReadAsStringAsync();
+            }
+        }
+
+        #endregion
+
     }
 }

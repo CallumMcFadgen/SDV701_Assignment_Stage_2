@@ -80,15 +80,22 @@ namespace windows_admin_app
         #endregion
 
         #region UI METHODS
-        private async void btnOK_Click(object sender, EventArgs e)
+        protected async void btnOK_Click(object sender, EventArgs e)
         {
-            if (isISBNValid() == true && isAuthorValid() == true && isTitleValid() == true && isPriceValid() == true && isQuantityValid() == true)
+            if (isChanged() == true)
             {
-                pushData();
-                if (txtISBN.Enabled)
-                    MessageBox.Show(await ServiceClient.InsertBookAsync(_Book));
-                else
-                    MessageBox.Show(await ServiceClient.UpdateBookAsync(_Book));
+                if (isISBNValid() == true && isAuthorValid() == true && isTitleValid() == true && isPriceValid() == true && isQuantityValid() == true)
+                {
+                    pushData();
+                    if (txtISBN.Enabled)
+                        MessageBox.Show(await ServiceClient.InsertBookAsync(_Book));
+                    else
+                        MessageBox.Show(await ServiceClient.UpdateBookAsync(_Book));
+                    Close();
+                }
+            }
+            else
+            {
                 Close();
             }
         }
@@ -167,6 +174,17 @@ namespace windows_admin_app
             }
 
             return true;
+        }
+
+        // CHECK FOR FIELD CHANGES
+        protected virtual bool isChanged()
+        {
+            if (txtTitle.Text != _Book.Title || txtDesc.Text != _Book.Desc || txtPrice.Text != _Book.Price.ToString() || txtQuantity.Text != _Book.Price.ToString())
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion

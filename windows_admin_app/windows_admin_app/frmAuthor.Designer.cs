@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gbxBookSort = new System.Windows.Forms.GroupBox();
-            this.rbtnBookName = new System.Windows.Forms.RadioButton();
-            this.rbtnBookPrice = new System.Windows.Forms.RadioButton();
             this.lbxBooks = new System.Windows.Forms.ListBox();
             this.btnDeleteBook = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
@@ -44,54 +41,17 @@
             this.lblBooks = new System.Windows.Forms.Label();
             this.lblJoinDate = new System.Windows.Forms.Label();
             this.dateJoinDate = new System.Windows.Forms.DateTimePicker();
-            this.gbxBookSort.SuspendLayout();
+            this.lblBookTitle = new System.Windows.Forms.Label();
+            this.lblBookQuantity = new System.Windows.Forms.Label();
+            this.lblBookPrice = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // gbxBookSort
-            // 
-            this.gbxBookSort.BackColor = System.Drawing.SystemColors.Control;
-            this.gbxBookSort.Controls.Add(this.rbtnBookName);
-            this.gbxBookSort.Controls.Add(this.rbtnBookPrice);
-            this.gbxBookSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxBookSort.Location = new System.Drawing.Point(212, 152);
-            this.gbxBookSort.Name = "gbxBookSort";
-            this.gbxBookSort.Size = new System.Drawing.Size(241, 43);
-            this.gbxBookSort.TabIndex = 11;
-            this.gbxBookSort.TabStop = false;
-            this.gbxBookSort.Text = "Sort by";
-            // 
-            // rbtnBookName
-            // 
-            this.rbtnBookName.AutoSize = true;
-            this.rbtnBookName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnBookName.Location = new System.Drawing.Point(85, 17);
-            this.rbtnBookName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbtnBookName.Name = "rbtnBookName";
-            this.rbtnBookName.Size = new System.Drawing.Size(66, 21);
-            this.rbtnBookName.TabIndex = 5;
-            this.rbtnBookName.TabStop = true;
-            this.rbtnBookName.Text = "Name";
-            this.rbtnBookName.UseVisualStyleBackColor = true;
-            // 
-            // rbtnBookPrice
-            // 
-            this.rbtnBookPrice.AutoSize = true;
-            this.rbtnBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnBookPrice.Location = new System.Drawing.Point(167, 18);
-            this.rbtnBookPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rbtnBookPrice.Name = "rbtnBookPrice";
-            this.rbtnBookPrice.Size = new System.Drawing.Size(61, 21);
-            this.rbtnBookPrice.TabIndex = 4;
-            this.rbtnBookPrice.TabStop = true;
-            this.rbtnBookPrice.Text = "Price";
-            this.rbtnBookPrice.UseVisualStyleBackColor = true;
             // 
             // lbxBooks
             // 
             this.lbxBooks.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxBooks.FormattingEnabled = true;
             this.lbxBooks.ItemHeight = 18;
-            this.lbxBooks.Location = new System.Drawing.Point(27, 205);
+            this.lbxBooks.Location = new System.Drawing.Point(27, 220);
             this.lbxBooks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxBooks.Name = "lbxBooks";
             this.lbxBooks.Size = new System.Drawing.Size(426, 202);
@@ -106,7 +66,7 @@
             this.btnDeleteBook.Name = "btnDeleteBook";
             this.btnDeleteBook.Size = new System.Drawing.Size(107, 49);
             this.btnDeleteBook.TabIndex = 12;
-            this.btnDeleteBook.Text = "Delete";
+            this.btnDeleteBook.Text = "Remove";
             this.btnDeleteBook.UseVisualStyleBackColor = true;
             this.btnDeleteBook.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -138,20 +98,20 @@
             // 
             this.lblAuthorTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblAuthorTotal.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuthorTotal.Location = new System.Drawing.Point(169, 428);
+            this.lblAuthorTotal.Location = new System.Drawing.Point(282, 443);
             this.lblAuthorTotal.Name = "lblAuthorTotal";
-            this.lblAuthorTotal.Size = new System.Drawing.Size(243, 25);
+            this.lblAuthorTotal.Size = new System.Drawing.Size(150, 25);
             this.lblAuthorTotal.TabIndex = 16;
             // 
             // lblAuthorTotalHeading
             // 
             this.lblAuthorTotalHeading.AutoSize = true;
             this.lblAuthorTotalHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuthorTotalHeading.Location = new System.Drawing.Point(58, 428);
+            this.lblAuthorTotalHeading.Location = new System.Drawing.Point(43, 443);
             this.lblAuthorTotalHeading.Name = "lblAuthorTotalHeading";
-            this.lblAuthorTotalHeading.Size = new System.Drawing.Size(105, 24);
+            this.lblAuthorTotalHeading.Size = new System.Drawing.Size(223, 24);
             this.lblAuthorTotalHeading.TabIndex = 15;
-            this.lblAuthorTotalHeading.Text = "Total Value";
+            this.lblAuthorTotalHeading.Text = "Authors Total Book Value";
             // 
             // lblName
             // 
@@ -195,7 +155,7 @@
             // 
             this.lblBooks.AutoSize = true;
             this.lblBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBooks.Location = new System.Drawing.Point(44, 154);
+            this.lblBooks.Location = new System.Drawing.Point(192, 159);
             this.lblBooks.Name = "lblBooks";
             this.lblBooks.Size = new System.Drawing.Size(99, 36);
             this.lblBooks.TabIndex = 21;
@@ -220,11 +180,44 @@
             this.dateJoinDate.Size = new System.Drawing.Size(363, 25);
             this.dateJoinDate.TabIndex = 23;
             // 
+            // lblBookTitle
+            // 
+            this.lblBookTitle.AutoSize = true;
+            this.lblBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookTitle.Location = new System.Drawing.Point(35, 198);
+            this.lblBookTitle.Name = "lblBookTitle";
+            this.lblBookTitle.Size = new System.Drawing.Size(41, 20);
+            this.lblBookTitle.TabIndex = 24;
+            this.lblBookTitle.Text = "Title";
+            // 
+            // lblBookQuantity
+            // 
+            this.lblBookQuantity.AutoSize = true;
+            this.lblBookQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookQuantity.Location = new System.Drawing.Point(293, 198);
+            this.lblBookQuantity.Name = "lblBookQuantity";
+            this.lblBookQuantity.Size = new System.Drawing.Size(35, 20);
+            this.lblBookQuantity.TabIndex = 25;
+            this.lblBookQuantity.Text = "Qty";
+            // 
+            // lblBookPrice
+            // 
+            this.lblBookPrice.AutoSize = true;
+            this.lblBookPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBookPrice.Location = new System.Drawing.Point(390, 198);
+            this.lblBookPrice.Name = "lblBookPrice";
+            this.lblBookPrice.Size = new System.Drawing.Size(48, 20);
+            this.lblBookPrice.TabIndex = 26;
+            this.lblBookPrice.Text = "Price";
+            // 
             // frmAuthor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 582);
+            this.ClientSize = new System.Drawing.Size(483, 582);
+            this.Controls.Add(this.lblBookPrice);
+            this.Controls.Add(this.lblBookQuantity);
+            this.Controls.Add(this.lblBookTitle);
             this.Controls.Add(this.dateJoinDate);
             this.Controls.Add(this.lblJoinDate);
             this.Controls.Add(this.lblBooks);
@@ -237,22 +230,16 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddBook);
             this.Controls.Add(this.btnDeleteBook);
-            this.Controls.Add(this.gbxBookSort);
             this.Controls.Add(this.lbxBooks);
             this.Name = "frmAuthor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Author Details";
-            this.gbxBookSort.ResumeLayout(false);
-            this.gbxBookSort.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox gbxBookSort;
-        private System.Windows.Forms.RadioButton rbtnBookName;
-        private System.Windows.Forms.RadioButton rbtnBookPrice;
         private System.Windows.Forms.ListBox lbxBooks;
         private System.Windows.Forms.Button btnDeleteBook;
         private System.Windows.Forms.Button btnAddBook;
@@ -266,5 +253,8 @@
         private System.Windows.Forms.Label lblBooks;
         private System.Windows.Forms.Label lblJoinDate;
         private System.Windows.Forms.DateTimePicker dateJoinDate;
+        private System.Windows.Forms.Label lblBookTitle;
+        private System.Windows.Forms.Label lblBookQuantity;
+        private System.Windows.Forms.Label lblBookPrice;
     }
 }

@@ -16,7 +16,6 @@ namespace windows_admin_app
     }
     #endregion
 
-
     #region BOOK DTO
     public class clsBook
     {
@@ -30,12 +29,15 @@ namespace windows_admin_app
         public string Genre { get; set; }
         public string Category { get; set; }
         public string AuthorName {get; set;}
-        #endregion
+
 
         // AUTHOR FORM DATA FORMATING
         public override string ToString()
         {
-            return string.Format("{0, -38}", Title) + "$" + string.Format("{0, 0}", Price);
+            return 
+                string.Format(" {0, -28}", Title) +
+                string.Format("{0, -9}", Quantity) +
+                "$" + string.Format("{0, 0}", Price);
         }
 
         // FACTORY METHOD
@@ -45,6 +47,8 @@ namespace windows_admin_app
         }
 
     }
+
+    #endregion
 
     #region ORDER DTO
     public class clsOrder
@@ -56,11 +60,23 @@ namespace windows_admin_app
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string Isbn { get; set; }
-
         public List<clsOrder> OrderList { get; set; }
+
+        // AUTHOR FORM DATA FORMATING
+        public override string ToString()
+        {
+            return 
+                string.Format(" {0, -8}", Number) + 
+                string.Format("{0, -22}", Name) + 
+                string.Format("{0, -31}", Email) +
+                string.Format("{0, -16}", OrderDate.ToShortDateString()) +
+                string.Format("{0, -16}", Isbn) +
+                "$" + string.Format("{0, -10}", Price) +
+                string.Format("{0, -6}", Quantity) +
+                "$" + string.Format("{0, 0}", (Quantity * Price));
+        }
     }
+
     #endregion
-
-
 
 }
