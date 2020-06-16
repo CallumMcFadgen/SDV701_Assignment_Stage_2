@@ -26,13 +26,17 @@ export class BookPage implements OnInit {
     public loadingController: LoadingController,
     private router: Router,
     private location: Location,
-    private storage: Storage
+    private storage: Storage,
   ) {
     this.setBookID();
   }
 
   ngOnInit() {
     this.loadBook();
+  }
+
+  ionViewWillEnter() {
+    this.checkIfRefreshNeeded();
   }
 
   // SET THE BOOK ID FOR API ROUTE
@@ -47,6 +51,17 @@ export class BookPage implements OnInit {
   goToOrderPage(prBookNumber: any) {
     this.storage.set('book_id', prBookNumber);
     this.router.navigate(['/book-order']);
+  }
+
+  // CHECK IF A REFRESH IS REQUIRED
+  async checkIfRefreshNeeded() {
+    await this.storage.get('refresh_page').then((refresh_flag) => {
+      if (refresh_flag === true) {
+        this.loadBook();
+        this.storage.set('refresh_page', false);
+      }
+      console.log(refresh_flag);
+    });
   }
 
   // LOAD AUTHOR OBJECT FROM API ROUTE
@@ -85,6 +100,7 @@ export class BookPage implements OnInit {
     return this.http.get(dataUrl + id);
   }
 
+  // RETURN TO PREVIOUS PAGE
   goBack(default_href) {
     if (window.history.length > 1) {
       this.location.back();
@@ -93,4 +109,5 @@ export class BookPage implements OnInit {
       this.router.navigateByUrl(default_href);
     }
   }
+
 }

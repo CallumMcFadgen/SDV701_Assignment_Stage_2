@@ -47,19 +47,18 @@
     <ion-item>
       <ion-label class="ion-text-wrap" lines="full">
         <b>Date : </b> {{current_date}}
-        <!-- <b>Date : </b> {{this.moment(order.OrderDate).utc().format("DD/MM/YYYY hh:mm a")}} -->
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label class="ion-text-wrap" lines="full">
         <b>Quantity : </b>
       </ion-label>
-      <ion-input type="number" onkeydown="return false" min="1" [(ngModel)]="order['Quantity']"  (ngModelChange)="setOrderTotal()">
+      <ion-input type="number" onkeydown="return false" min="1" max="{{max_char}}" [(ngModel)]="order['Quantity']"  (ngModelChange)="setOrderTotal()">
       </ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label class="ion-text-wrap">
-        <b>Total : </b>{{order_total}}
+        <b>Total : </b>${{order_total}}
       </ion-label>
     </ion-item>
   </ion-item-group>

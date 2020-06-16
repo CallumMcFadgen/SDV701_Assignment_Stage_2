@@ -18,6 +18,18 @@ export class BookOrderPage implements OnInit {
   loading = null;
   book_id = null ;
   book = null;
+  error = null;
+  moment = moment;
+  order_total = null;
+  current_date = null;
+  max_char = null;
+
+  book_update = {
+    Quantity: null,
+    Isbn: null,
+    EditDate: null
+  }
+
   order = {
     Name: null,
     Email: null,
@@ -26,10 +38,6 @@ export class BookOrderPage implements OnInit {
     Quantity: null,
     Isbn: null
   };
-  error = null;
-  moment = moment;
-  order_total = null;
-  current_date = null;
 
   constructor(
     private http: HttpClient,
@@ -37,7 +45,7 @@ export class BookOrderPage implements OnInit {
     public alertController: AlertController,
     private router: Router,
     private location: Location,
-    private storage: Storage
+    private storage: Storage,
   ) {
     this.setBookID();
   }
@@ -47,17 +55,31 @@ export class BookOrderPage implements OnInit {
     this.setInitialOrderParams();
   }
 
-  // VALIDATE INPUT AND POST ORDER
-  postBookOrder() {
-    if (this.isNameValid() === true && this.isEmailValid() === true)
-    {
-      this.addPerson();
-    }
+  // GET BOOK ID
+  setBookID() {
+    this.storage.get('book_id').then((prBookNumber) => {
+      this.book_id = prBookNumber;
+      console.log(this.book_id);
+    });
   }
 
   // MULTIPLY PRICE BY QUANTIY
   setOrderTotal() {
     this.order_total = (this.book?.Price * this.order.Quantity);
+  }
+
+  // VALIDATE USER INPUT AND SHOW CONFIRMATION POP UP
+  postBookOrder() {
+    if (this.isNameValid() === true && this.isEmailValid() === true)
+    {
+      this.presentConfirmation(
+        'Please confirm',
+        'Order details',
+        '<b>Title : </b>' + this.book.Title + '<br />' +
+        '<b>Price : $</b>' + this.order.Price + '<br />' +
+        '<b>Quantity : </b>' + this.order.Quantity + '<br /> <br />' +
+        '<b>Order Total : $</b>' + this.order_total);
+    }
   }
 
   // CHECK NAME IS VALID
@@ -78,14 +100,6 @@ export class BookOrderPage implements OnInit {
     }
     this.presentAlert('Error', 'Empty email field', 'Please enter an email address into the email field');
     return false;
-  }
-
-  // GET ORDER TOTAL
-  setBookID() {
-    this.storage.get('book_id').then((prBookNumber) => {
-      this.book_id = prBookNumber;
-      console.log(this.book_id);
-    });
   }
 
   // LOAD AUTHOR OBJECT FROM API ROUTE
@@ -125,13 +139,56 @@ export class BookOrderPage implements OnInit {
     return this.http.get(dataUrl + id);
   }
 
+  // POST BOOK_UPDATE OBJECT ON API ROUTE
+  async updateBook() {
+    await this.presentPutBook();
+    this.putBook()
+      .pipe(
+        finalize(async () => {
+          await this.loading.dismiss();
+        })
+      )
+      .subscribe(
+        data => {
+          console.log(data);
+          if (data.toString() === 'Success' )
+          {
+            this.addOrder();
+          }
+          else{
+            this.presentError('Error', 'Order failed', 'There seems to be a problem with your order <br /> <br /> Please check the quantity available and contact our team if the problem persists ');
+          }
+        },
+        err => {
+          this.error = `Posting an order failed: Status: ${err.status}, Message: ${err.statusText}`;
+        }
+      );
+  }
+
+  // PUTING SPINNER
+  async presentPutBook() {
+    this.loading = await this.loadingController.create({
+      message: 'Dispatching order...'
+    });
+    await this.loading.present();
+  }
+
+  // API PUT BOOK URL
+  private putBook(): Observable<object> {
+    const body = this.book_update;
+    const dataUrl = 'http://localhost:60064/api/store/PutBookQuantity';
+    console.log('put body data'.toString() + body);
+    return this.http.put(dataUrl , body);
+  }
+
   // POST ORDER OBJECT ON API ROUTE
-  async addPerson() {
+  async addOrder() {
     await this.presentPostingOrder();
     this.postOrder()
       .pipe(
         finalize(async () => {
           await this.loading.dismiss();
+          await this.presentSuccess('Success', 'Order dispatched', 'Thank you for you order <br /> <br /> Our team will be in contact soon to arrange payment and delivery <br /> <br /> Thank you for supporting our authors');
         })
       )
       .subscribe(
@@ -147,17 +204,16 @@ export class BookOrderPage implements OnInit {
   // POSTING SPINNER
   async presentPostingOrder() {
     this.loading = await this.loadingController.create({
-      message: 'Creating order...'
+      message: 'Processing...'
     });
     await this.loading.present();
   }
 
   // API POST ORDER URL
    private postOrder(): Observable<object> {
-    const headers = { 'content-type': 'application/json'};
     const body = this.order;
     const dataUrl = 'http://localhost:60064/api/store/PostOrder';
-    console.log('post body data' + body);
+    console.log('post body data'.toString() + body);
     return this.http.post(dataUrl , body);
   }
 
@@ -169,7 +225,15 @@ export class BookOrderPage implements OnInit {
     this.order.OrderDate = new Date();
     this.order.Price = this.book?.Price;
     this.order.Isbn = this.book?.Isbn;
+    this.max_char = this.book?.Quantity;
     console.log(this.order);
+  }
+
+  async setBookUpdateParams() {
+    this.book_update.Quantity = this.order.Quantity;
+    this.book_update.EditDate = new Date();
+    this.book_update.Isbn = this.book.Isbn;
+    console.log(this.book_update);
   }
 
   // RETURN TO PREVIOUS PAGE
@@ -182,13 +246,73 @@ export class BookOrderPage implements OnInit {
     }
   }
 
-  // PRESENT AN ALERT POP UP
+  // PRESENT GENERIC ALERT POP UP
   async presentAlert(prHeader, prSubHeader, prMessage) {
     const alert = await this.alertController.create({
       header: prHeader,
       subHeader: prSubHeader,
       message: prMessage,
       buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  // PRESENT A ORDER CONFIRMATION POP UP
+  async presentConfirmation(prHeader, prSubHeader, prMessage) {
+    const alert = await this.alertController.create({
+      header: prHeader,
+      subHeader: prSubHeader,
+      message: prMessage,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler: () => {
+            this.setBookUpdateParams();
+            this.updateBook();
+          }
+        }
+      ],
+    });
+    await alert.present();
+  }
+
+  // PRESENT AN ORDER SUCCESS POP UP
+  async presentSuccess(prHeader, prSubHeader, prMessage) {
+    const alert = await this.alertController.create({
+      header: prHeader,
+      subHeader: prSubHeader,
+      message: prMessage,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.storage.set('refresh_page', true);
+            this.goBack('/book');
+          }
+        }
+      ],
+    });
+    await alert.present();
+  }
+
+  // PRESENT AN ORDER ERROR POP UP
+  async presentError(prHeader, prSubHeader, prMessage) {
+    const alert = await this.alertController.create({
+      header: prHeader,
+      subHeader: prSubHeader,
+      message: prMessage,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.goBack('/book');
+          }
+        }
+      ],
     });
     await alert.present();
   }

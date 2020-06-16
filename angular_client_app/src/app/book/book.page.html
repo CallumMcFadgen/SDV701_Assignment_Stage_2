@@ -55,7 +55,7 @@
       </ion-label>
     </ion-item>
   </ion-item-group>
-  <ion-button class="ion-padding" (click)="goToOrderPage([book?.Isbn])" expand="block" size="medium" color="medium"> Create order</ion-button>
+  <ion-button *ngIf="book?.Quantity > 0" class="ion-padding" (click)="goToOrderPage([book?.Isbn])" expand="block" size="medium" color="medium"> Create order</ion-button>
 </ion-content>
 
 <ion-footer>

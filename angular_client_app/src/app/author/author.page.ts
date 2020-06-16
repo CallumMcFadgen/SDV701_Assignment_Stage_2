@@ -84,6 +84,7 @@ export class AuthorPage implements OnInit {
     return this.http.get(dataUrl);
   }
 
+  // RETURN TO PREVIOUS PAGE
   goBack(default_href) {
     if (window.history.length > 1) {
       this.location.back();
