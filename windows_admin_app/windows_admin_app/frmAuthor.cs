@@ -43,7 +43,6 @@ namespace windows_admin_app
                     _AuthorFormList.Add(prAuthorName, lcAuthorForm);
                     lcAuthorForm.refreshFormFromDB(prAuthorName);
                     lcAuthorForm.DisableTextFields();
-                    //getAuthorTotal(lcAuthorForm);       //working on
                 }
             }
             else
@@ -191,7 +190,7 @@ namespace windows_admin_app
             }
         }
 
-
+        // CHECK CHANGE AND VALIDATION 
         private async void btnClose_Click(object sender, EventArgs e)
         {
             if (isChanged() == true)
@@ -253,8 +252,6 @@ namespace windows_admin_app
             return true;
         }
 
-        #endregion
-
         // CHECK FOR FIELD CHANGES
         private bool isChanged()
         {
@@ -265,6 +262,8 @@ namespace windows_admin_app
 
             return false;
         }
+
+        #endregion
 
     }
 }

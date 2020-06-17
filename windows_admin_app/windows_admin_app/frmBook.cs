@@ -45,6 +45,7 @@ namespace windows_admin_app
             ShowDialog();
         }
 
+        // SET VALUES IN THE UI FROM DTO
         protected virtual void updateForm()
         {
             txtISBN.Enabled = string.IsNullOrEmpty(_Book.Isbn);
@@ -66,6 +67,7 @@ namespace windows_admin_app
             }
         }
 
+        // PUSH UI DATA TO DTO
         protected virtual void pushData()
         {
             _Book.Isbn = txtISBN.Text;
@@ -80,6 +82,8 @@ namespace windows_admin_app
         #endregion
 
         #region UI METHODS
+
+        // CHECK FOR CHANGE AND VALIDATION THEN UPDATE OR INSERT
         protected async void btnOK_Click(object sender, EventArgs e)
         {
             if (isChanged() == true)
@@ -100,6 +104,7 @@ namespace windows_admin_app
             }
         }
 
+        // CLOSE FORM WITH NO CHANGES
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -109,6 +114,7 @@ namespace windows_admin_app
 
         #region INPUT VALIDATION
 
+        // CHECK IF ISBN IS NULL OR EMPTY
         protected virtual bool isISBNValid()
         {
             if (string.IsNullOrWhiteSpace(txtISBN.Text))
@@ -120,6 +126,7 @@ namespace windows_admin_app
             return true;
         }
 
+        // CHECK IF AUTHOR NAME IS NULL OR EMPTY
         protected virtual bool isAuthorValid()
         {
             if (string.IsNullOrWhiteSpace(txtAuthor.Text))
@@ -131,6 +138,7 @@ namespace windows_admin_app
             return true;
         }
 
+        // CHECK IF THE BOOK TITLE IS NULL OR EMPTY
         protected virtual bool isTitleValid()
         {
             if (string.IsNullOrWhiteSpace(txtTitle.Text))
@@ -142,6 +150,7 @@ namespace windows_admin_app
             return true;
         }
 
+        // CHECK IF PRICE IS NULL OR EMPTY OR A LETTER
         protected virtual bool isPriceValid()
         {
             if (string.IsNullOrWhiteSpace(txtPrice.Text))
@@ -159,6 +168,7 @@ namespace windows_admin_app
             return true;
         }
 
+        // CHECK IF QUANTITY IS NULL OR EMPTY OR A LETTER
         protected virtual bool isQuantityValid()
         {
             if (string.IsNullOrWhiteSpace(txtQuantity.Text))
