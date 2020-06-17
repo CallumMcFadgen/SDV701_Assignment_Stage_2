@@ -8,7 +8,7 @@ This Github repo contains all of the resources required for my SDV701 Assignment
 This assignment was a multi-tier software development project using a fictional writing collective (The writers collective) as a use case for the 3 separate applications required. 
 The 3 applications used the Client Server Model to share data and functionality, the different application types used were
 <ul>
-  <li>A .Net console application providing REST API Routes (Server)</li>
+  <li>A .Net console application (Server)</li>
   <li>A .Net windows form application (Client)</li>
   <li>A Ionic/Angular Web application (Client)</li>
 </ul>
