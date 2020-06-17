@@ -1,0 +1,881 @@
+-- CREATE AUTHOR TABLE ---------------------------------
+CREATE TABLE [dbo].[author] (
+    [author_name]   VARCHAR (100) NOT NULL,
+    [email_address] VARCHAR (255) NOT NULL,
+    [join_date]     DATETIME      NOT NULL,
+    PRIMARY KEY CLUSTERED ([author_name] ASC)
+);
+
+-- CREATE BOOK TABLE ---------------------------------
+CREATE TABLE [dbo].[book] (
+    [isbn_number] CHAR (13)      NOT NULL,
+    [type]        VARCHAR (255)  NOT NULL,
+    [title]       VARCHAR (255)  NOT NULL,
+    [description] VARCHAR (5000) NULL,
+    [price]       DECIMAL (18)   NOT NULL,
+    [quantity]    INT            NOT NULL,
+    [edit_date]   DATETIME       NOT NULL,
+    [genre]       VARCHAR (100)  NULL,
+    [category]    VARCHAR (100)  NULL,
+    [author_name] VARCHAR (100)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([isbn_number] ASC),
+    CONSTRAINT [FK_BOOK_AUTHOR] FOREIGN KEY ([author_name]) REFERENCES [dbo].[author] ([author_name]) ON DELETE CASCADE
+);
+
+-- CREATE BOOK_ORDER TABLE ---------------------------------
+CREATE TABLE [dbo].[book_order] (
+    [order_number]  INT             IDENTITY (1, 1) NOT NULL,
+    [customer_name] VARCHAR (100)   NOT NULL,
+    [email_address] VARCHAR (255)   NOT NULL,
+    [order_date]    DATETIME2       NOT NULL,
+    [item_price]    DECIMAL (13, 2) NOT NULL,
+    [quantity]      NCHAR (10)      NOT NULL,
+    [isbn_number]   CHAR (13)       NOT NULL,
+    PRIMARY KEY CLUSTERED ([order_number] ASC),
+    CONSTRAINT [FK_book_order_book] FOREIGN KEY ([isbn_number]) REFERENCES [dbo].[book] ([isbn_number])
+);
+
+
+-- INSERT AUTHOR DATA ---------------------------------
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Phillip Jackson', 
+'pjackson@yahoo.com', 
+'2005-05-03 15:35:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Georgia Borth', 
+'gborth4@pcworld.com', 
+'2007-09-27 09:27:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Teddie McQuarrie', 
+'tmcquarrie9@posterous.com', 
+'2006-10-01 13:48:00');
+
+INSERT INTO author (
+author_name,
+email_address, 
+join_date)
+VALUES (
+'Del Ziemecki', 
+'dziemecki5g@studiopress.com', 
+'2008-04-23 10:25:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Brena Perkin', 
+'bperkin91@acquirethisname.com', 
+'2004-01-18 16:56:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Martin Luney', 
+'mluneyci@tmall.com', 
+'2010-05-03 17:05:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Carlene Docharty', 
+'cdochartyer@twitpic.com', 
+'2012-08-23 11:21:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Jacquie Garret', 
+'jgarretgr@multiply.com', 
+'2013-07-19 14:13:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Doyle Fanthome', 
+'dfanthomemc@elpais.com', 
+'2015-12-07 10:57:00');
+
+INSERT INTO author (
+author_name, 
+email_address, 
+join_date)
+VALUES (
+'Alica Glynnet', 
+'aglynnepp@sphinn.com', 
+'2017-08-13 09:31:00');
+
+
+
+
+--INSERT BOOK DATA -------------------------------------
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'251884066-4',
+'non-fiction',
+'A Dog Year',
+'A lovely book about a year with dogs',
+35.00,
+28,
+'2020-05-11 11:00:00',
+'',
+'Animals',
+'Georgia Borth'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'389614206-2',
+'non-fiction',
+'Trainer on the beach',
+'My experiences as a dog trainer on beaches',
+28,
+33,
+'2020-05-11 11:00:00',
+'',
+'Animals',
+'Georgia Borth'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'414398968-9',
+'fiction',
+'Just a Sigh',
+'Just right for some "me" time',
+25.00,
+56,
+'2020-05-11 11:00:00',
+'Romance',
+'',
+'Jacquie Garret'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'651785106-2',
+'fiction',
+'Loves Coincidences',
+'A nice romantic comedy book',
+28.00,
+62,
+'2020-05-11 11:00:00',
+'Romance',
+'',
+'Jacquie Garret'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'086448841-6',
+'fiction',
+'Eerie Tales',
+'A chilling horror story',
+36.00,
+19,
+'2020-05-11 11:00:00',
+'Horror',
+'',
+'Martin Luney'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'768524520-5',
+'fiction',
+'Scarlet Dove',
+'Gritty urban horror',
+36.00,
+29,
+'2020-05-11 11:00:00',
+'Horror',
+'',
+'Martin Luney'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'970497942-8',
+'non-fiction',
+'The Climb',
+'Help your self with a self help book',
+24.00,
+85,
+'2020-05-11 11:00:00',
+'',
+'Self Help',
+'Alica Glynnet'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'733756291-8',
+'non-fiction',
+'Lets Not Keep in Touch!',
+'A guide to breaking up',
+28.50,
+41,
+'2020-05-11 11:00:00',
+'',
+'Self Help',
+'Alica Glynnet'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'519255807-7',
+'non-fiction',
+'Faithful',
+'Stay true to yourself in modern life',
+30.50,
+14,
+'2020-05-11 11:00:00',
+'',
+'Self Help',
+'Alica Glynnet'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'578821098-4',
+'non-fiction',
+'Submarine',
+'A book about working on a submarine',
+27.50,
+46,
+'2020-05-11 11:00:00',
+'',
+'Travelogue',
+'Phillip Jackson'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'728258319-6',
+'non-fiction',
+'The Human Factor',
+'People can do great things',
+32.50,
+18,
+'2020-05-11 11:00:00',
+'',
+'Philosophy',
+'Phillip Jackson'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'855385529-5',
+'fiction',
+'Dark Victory',
+'A struggle against evil',
+32.50,
+18,
+'2020-05-11 11:00:00',
+'Fantasy',
+'',
+'Doyle Fanthome'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'869281062-2',
+'fiction',
+'The Damned',
+'A strange half demon child walks the streets',
+34.00,
+47,
+'2020-05-11 11:00:00',
+'Fantasy',
+'',
+'Doyle Fanthome'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'817089839-0',
+'non-fiction',
+'Continental Divide',
+'A look at geography on the continental divide',
+42.00,
+17,
+'2020-05-11 11:00:00',
+'',
+'Geography',
+'Carlene Docharty'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'550549286-X',
+'non-fiction',
+'Red Canyon',
+'Exploring the Grand Canyon',
+28.50,
+29,
+'2020-05-11 11:00:00',
+'',
+'Geography',
+'Carlene Docharty'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'077586228-2',
+'fiction',
+'Margin Call',
+'Full on action and adventure',
+24.50,
+41,
+'2020-05-11 11:00:00',
+'Action',
+'',
+'Del Ziemecki'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'768134094-7',
+'fiction',
+'Command Decision',
+'Full on action and adventure',
+26.00,
+36,
+'2020-05-11 11:00:00',
+'Action',
+'',
+'Del Ziemecki'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'293446692-2',
+'non-fiction',
+'Sidewalks of London',
+'Photographic study of London streets',
+42.00,
+19,
+'2020-05-11 11:00:00',
+'',
+'Photography',
+'Teddie McQuarrie'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'514068408-X',
+'non-fiction',
+'Castles in the Sky',
+'Photographic study of castles in mountain regions',
+45.00,
+25,
+'2020-05-11 11:00:00',
+'',
+'Photography',
+'Teddie McQuarrie'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'371242645-3',
+'fiction',
+'Even Cowgirls Get the Blues',
+'Life is hard when your the only girl on the ranch',
+24.50,
+27,
+'2020-05-11 11:00:00',
+'Romance',
+'',
+'Brena Perkin'
+);
+
+INSERT INTO book (
+isbn_number, 
+type, 
+title, 
+description, 
+price, 
+quantity, 
+edit_date, 
+genre, 
+category, 
+author_name)
+VALUES (
+'042564616-5',
+'fiction',
+'Valhalla Rising',
+'The fierce Valkyries are rising, in texas',
+26.50,
+16,
+'2020-05-11 11:00:00',
+'Fantasy',
+'',
+'Brena Perkin'
+);
+
+
+
+-- INSERT BOOK_ORDER DATA ---------------------------------------
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Anna Extal',
+'aextal4@hibu.com',
+'2020-02-27 18:38:00',
+25,
+1,
+'371242645-3'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Ricky Clell',
+'rclell1k@bizjournals.com',
+'2020-03-02 13:26:00',
+26,
+1,
+'768134094-7'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Tucker Halfhide',
+'mhartfleet1y@discovery.com',
+'2020-03-05 09:15:00',
+27,
+1,
+'042564616-5'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Dennie Hardman',
+'dhardman2u@nyu.edu',
+'2020-03-12 12:45:00',
+42,
+2,
+'293446692-2'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Sherwin Colebourne',
+'scolebourne1d@pcworld.com',
+'2020-03-17 12:45:00',
+28,
+1,
+'651785106-2'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Jeanine Alflatt',
+'jalflatt69@is.gd',
+'2020-03-22 20:16:00',
+29,
+1,
+'550549286-X'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Lynde Franzonetti',
+'lfranzonetti8v@oracle.com',
+'2020-03-25 11:34:00',
+36,
+1,
+'086448841-6'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Tony Sertin',
+'tsertina9@moonfruit.com',
+'2020-03-29 17:16:00',
+26,
+1,
+'768134094-7'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Ruddy Sifleet',
+'rsifleetc9@shinystat.com',
+'2020-04-04 18:04:00',
+33,
+5,
+'728258319-6'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Wesley Toohey',
+'wtooheyd4@wunderground.com',
+'2020-04-07 21:45:00',
+28,
+1,
+'578821098-4'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Sallyanne Kliement',
+'skliementrr@usa.gov',
+'2020-04-13 15:19:00',
+25,
+2,
+'371242645-3'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Thelma McTurley',
+'tmcturleyrh@studiopress.com',
+'2020-04-26 13:18:00',
+24,
+1,
+'970497942-8'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'North Biss',
+'nbissp9@usatoday.com',
+'2020-04-17 14:03:00',
+25,
+2,
+'414398968-9'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Collin Garner',
+'cgarnermf@booking.com',
+'2020-04-27 19:47:00',
+36,
+1,
+'768524520-5'
+);
+
+INSERT INTO [book_order](
+customer_name, 
+email_address, 
+order_date, 
+item_price, 
+quantity, 
+isbn_number)
+VALUES (
+'Lodovico Moscone',
+'lmosconekw@epa.gov.com',
+'2020-05-01 07:04:00',
+35,
+2,
+'251884066-4'
+);
+
