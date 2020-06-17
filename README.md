@@ -27,3 +27,4 @@ The Angular application provides some simple customer functions, allowing the us
 All of these applications have been tested, demonstrated and have meet the assignment requirements.  They have been quite robust, with only one or two small bugs.
 <br />
 <br />
+<b>Note</b>The database is an .mdf file containing a relational database with 3 tables (Author, Book and Book_Order).  This data base is included in the database folder, including a copy of the create and insert SQL queries used to originally build and populate the database for development and testing.
