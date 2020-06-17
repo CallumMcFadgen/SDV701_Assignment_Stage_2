@@ -15,7 +15,15 @@ The 3 applications used the Client Server Model to share data and functionality,
 <br />
 
 ### Features
-The .Net console application provides an interface with a SQL Sever database, this interface is available to multiple Client applications and provides a range of REST APIs that can be accessed, covering a the full range of GET, POST, PUT and DELETE methods.
+The .Net console application provides an interface with a SQL Sever database, this interface is available to multiple Client applications and provides a range of REST APIs that can be accessed by Client application, to use a range of GET, POST, PUT and DELETE methods.
 <br />
 <br />
-The database is a small .mdf file containing a relational database with 3 tables (Author, Book and Book_Order) to support the assignment requirements, This data base is included in this repo in the database folder, including a copy of the create and insert SQL queries used to build and populate the database for development and testing.
+The .Net windows forms application provides a range of administration functions, allowing the user (the writers collective admin) to view authors, view, edit and delete books and view and delete orders.
+<br />
+<br />
+The Angular application provides some simple customer functions, allowing the user (a member of the public) to view authors and their books and to create and dispatch orders for purchasing books.
+<br />
+<br />
+All of these applications have been tested, demonstrated and have meet the assignment requirements.  They have been quite robust, with only one or two small bugs.
+<br />
+<br />
