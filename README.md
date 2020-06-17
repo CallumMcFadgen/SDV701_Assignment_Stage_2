@@ -13,7 +13,9 @@ The 3 applications used the Client Server Model to share data and functionality,
   <li>A Ionic/Angular Web application (Client)</li>
 </ul>
 <br />
+
 ### Features
 The .Net console application provides an interface with a SQL Sever database, this interface is available to multiple Client applications and provides a range of REST APIs that can be accessed, covering a the full range of GET, POST, PUT and DELETE methods.
+<br />
 <br />
 The database is a small .mdf file containing a relational database with 3 tables (Author, Book and Book_Order) to support the assignment requirements, This data base is included in this repo in the database folder, including a copy of the create and insert SQL queries used to build and populate the database for development and testing.
