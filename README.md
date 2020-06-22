@@ -39,16 +39,25 @@ The database should now be accessible from the Server Explorer.  Right-click on 
 Before you can launch a service on your computer, you need to enable URL registration.  Run the Command Prompt as Administrator.  Type or paste the following line with the relevant computer and usernames to enable the selfhosts designated port.
  
 ```
-netsh http add urlacl url=http://+:60064/ user=[computer-name\user-name]
+netsh http add urlacl url=http://+:60064/ user=<b>computer-name\user-name</b>
 ```
 
-Finally check in the App.config file that the file path for the AttachDbFilename in the connection strings matches the actual file path of the database file on the local device
+Finally check in the App.config file that the file path for the data base file in the connection strings matches the actual file path on the local device
 
 ```
 <connectionStrings>
 <add name="GalleryDatabase" providerName="System.Data.SqlClient"
 connectionString="Data Source=(LocalDB)\MSSQLLocalDB;
-AttachDbFilename=[Database filepath];
+AttachDbFilename=<b>local file path<b>\Gallery_Data.mdf;
 Database=GALLERY_DATA.MDF"/>
 </connectionStrings>
 ```
+
+### Testing
+To test the 3 applications simultaneously, I opened the selfhost by running its exe file, I ran the Windows application by opening the solution in VS and running it and I ran the Angular app by typing 
+
+```
+ionic serve 
+```
+
+into a terminal in the applications directory through VS Code.
