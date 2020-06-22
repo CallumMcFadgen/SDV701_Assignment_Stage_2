@@ -23,9 +23,6 @@ The Angular application provides some simple customer functions, allowing the us
 <br />
 <br />
 All of these applications have been tested, demonstrated and have meet the assignment requirements.  They have been quite robust, with only one or two small bugs.
-<br />
-<br />
-<b>Note</b> The database is an .mdf file containing a relational database with 3 tables (Author, Book and Book_Order).  This data base is included in the database folder, including a copy of the create and insert SQL queries used to originally build and populate the database for development and testing.
 
 ### Local installation
 Some may be some additional configuration needed on a local device, such as connecting the selfhost to the database and giving the self-host permission to run from a local port.
@@ -39,9 +36,19 @@ The data source should read Microsoft SQL Server Database File (SqlClient), chan
 
 The database should now be accessible from the Server Explorer.  Right-click on any of the tables and select Show Table Data to view the sample data in the database.
 
-Before you can launch a service on your computer, you need to enable URL registration: Run the
-Command Prompt as Administrator. Type or paste the following line enable the selfhosts designated port 
+Before you can launch a service on your computer, you need to enable URL registration.  Run the Command Prompt as Administrator.  Type or paste the following line with the relevant computer and usernames to enable the selfhosts designated port.
+ 
+```
+netsh http add urlacl url=http://+:60064/ user=<b>computer-name\user-name</b>
+```
 
-~~
-netsh http add urlacl url=http://+:60064/ user=computer-name\user-name
-~~
+Finally check in the App.config file that the file path for the data base file in the connection strings matches the actual file path on the local device
+
+```
+<connectionStrings>
+<add name="GalleryDatabase" providerName="System.Data.SqlClient"
+connectionString="Data Source=(LocalDB)\MSSQLLocalDB;
+AttachDbFilename=<b>local file path<b>\Gallery_Data.mdf;
+Database=GALLERY_DATA.MDF"/>
+</connectionStrings>
+```
