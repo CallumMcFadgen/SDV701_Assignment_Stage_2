@@ -26,3 +26,22 @@ All of these applications have been tested, demonstrated and have meet the assig
 <br />
 <br />
 <b>Note</b> The database is an .mdf file containing a relational database with 3 tables (Author, Book and Book_Order).  This data base is included in the database folder, including a copy of the create and insert SQL queries used to originally build and populate the database for development and testing.
+
+### Local installation
+Some may be some additional configuration needed on a local device, such as connecting the selfhost to the database and giving the self-host permission to run from a local port.
+
+If there are any issues use the following guidelines based on the Lab 3 documentation to trouble shoot the problem.
+The SQL-Server database file twc_database.mdf in the database folder should have been extracted to your local device with the rest of the project folders, if not get a copy manually.
+
+Open the project folder in Visual Studio and open the self host solution, open the Server Explorer Tab, right-click on Data Connections, select Add Connection.  Visual Studio may ask you to install missing packages, go through with the installation process, it will restart VS.
+
+The data source should read Microsoft SQL Server Database File (SqlClient), change if necessary, then browse to the twc_database.mdf file, accept defaults and click OK.
+
+The database should now be accessible from the Server Explorer.  Right-click on any of the tables and select Show Table Data to view the sample data in the database.
+
+Before you can launch a service on your computer, you need to enable URL registration: Run the
+Command Prompt as Administrator. Type or paste the following line enable the selfhosts designated port 
+
+~~
+netsh http add urlacl url=http://+:60064/ user=computer-name\user-name
+~~
