@@ -61,3 +61,5 @@ ionic serve
 ```
 
 into a terminal in the applications directory through VS Code.
+
+For any persistent issues, please don’t hesitate to contact me at Callum-McFadgen@live.nmit.ac.nz
